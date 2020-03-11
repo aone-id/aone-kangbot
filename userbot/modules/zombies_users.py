@@ -208,7 +208,8 @@ async def get_user_from_id(user, event):
 
     return user_obj
   
- CMD_HELP.update(
-    {"Zombies":".Zombies\
-    \nUsage:Detect and kick some member has been inactive for several months or deleted account."})
+CMD_HELP.update({
+    'zombies':
+    ".zombies \nUsage: Cleaning Deleted Account."
+})
     
