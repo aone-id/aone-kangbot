@@ -68,7 +68,7 @@ async def upstream(ups):
         if conf != "now":
             await ups.edit(
                 f"`Unfortunately, the directory {error} does not seem to be a git repository.\
-            \nBut we can fix that by force updating the userbot using .update now.`"
+            \nBut we can fix that by force updating the aone-kangbot using .update now.`"
             )
             return
         repo = Repo.init()
@@ -125,9 +125,9 @@ async def upstream(ups):
 
     if force_update:
         await ups.edit(
-            '`Force-Syncing to latest stable userbot code, please wait...`')
+            '`Force-Syncing to latest stable aone-kangbot code, please wait...`')
     else:
-        await ups.edit('`Updating userbot, please wait....`')
+        await ups.edit('`Updating aone-kangbot, please wait....`')
     # We're in a Heroku Dyno, handle it's memez.
     if HEROKU_APIKEY is not None:
         import heroku3
@@ -136,7 +136,7 @@ async def upstream(ups):
         heroku_applications = heroku.apps()
         if not HEROKU_APPNAME:
             await ups.edit(
-                '`[HEROKU MEMEZ] Please set up the HEROKU_APPNAME variable to be able to update userbot.`'
+                '`[HEROKU MEMEZ] Please set up the HEROKU_APPNAME variable to be able to update aone-kangbot.`'
             )
             repo.__del__()
             return
@@ -146,12 +146,12 @@ async def upstream(ups):
                 break
         if heroku_app is None:
             await ups.edit(
-                f'{txt}\n`Invalid Heroku credentials for updating userbot dyno.`'
+                f'{txt}\n`Invalid Heroku credentials for updating aone-kangbot dyno.`'
             )
             repo.__del__()
             return
         await ups.edit('`[HEROKU MEMEZ]\
-                        \nUserbot dyno build in progress, please wait for it to complete.`'
+                        \naone-kangbot dyno build in progress, please wait for it to complete.`'
                        )
         ups_rem.fetch(ac_br)
         repo.git.reset("--hard", "FETCH_HEAD")
@@ -178,7 +178,7 @@ async def upstream(ups):
             repo.git.reset("--hard", "FETCH_HEAD")
         reqs_upgrade = await update_requirements()
         await ups.edit('`Successfully Updated!\n'
-                       'Bot is restarting... Wait for a second!`')
+                       'Bot is restarting... Wait for a second! and happy kanging`')
         # Spin a new instance of bot
         args = [sys.executable, "-m", "userbot"]
         execle(sys.executable, *args, environ)
@@ -190,5 +190,5 @@ CMD_HELP.update({
     ".update\
 \nUsage: Checks if the main userbot repository has any updates and shows a changelog if so.\
 \n\n.update now\
-\nUsage: Updates your userbot, if there are any updates in the main userbot repository."
+\nUsage: Updates your aone-kangbot, if there are any updates in the main aone-kangbot repository."
 })
