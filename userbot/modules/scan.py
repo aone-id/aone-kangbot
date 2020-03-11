@@ -41,5 +41,5 @@ async def _(event):
 CMD_HELP.update({
         "drweb": 
         ".scan \
-          \nFor scan a file from virus.\n"
+          \nFor reply to files for scan a file from virus.\n"
     })
