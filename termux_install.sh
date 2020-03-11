@@ -34,7 +34,7 @@ clear
 pkg update && pkg upgrade -y
 pkg install clang curl git libcrypt libffi libiconv libjpeg* libjpeg-turbo libwebp libxml2 libxslt make ndk-sysroot openssl postgresql python readline wget zlib -y
 
-git clone https://github.com/mkaraniya/OpenUserBot.git
+git clone https://github.com/aone-id/aone-kangbot.git
 cd OpenUserBot
 
 pip install --upgrade pip setuptools
@@ -50,7 +50,7 @@ createuser botuser
 
 cd ..
 echo "pg_ctl -D $PREFIX/var/lib/postgresql start" > startbot.sh
-echo "cd OpenUserBot" >> startbot.sh
+echo "cd aone-kangbot" >> startbot.sh
 echo "python3 -m userbot" >> startbot.sh
 chmod 755 startbot.sh
 
