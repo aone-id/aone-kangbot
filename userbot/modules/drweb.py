@@ -7,7 +7,7 @@ from telethon.tl.functions.account import UpdateNotifySettingsRequest
 from userbot.events import register
 from userbot import bot, CMD_HELP
 
-@register(outgoing=True, pattern="^.scan(?: |$)(.*)")
+@register(outgoing=True, pattern="^.drscan(?: |$)(.*)")
 async def _(event):
     if event.fwd_from:
         return 
@@ -40,6 +40,6 @@ async def _(event):
 
 CMD_HELP.update({
         "drweb": 
-        ".scan \
-          \nFor reply to files for scan a file from virus.\n"
+        ".drscan \
+          \nreply to files for scan a file from virus scanned by Drweb.\n"
     })
