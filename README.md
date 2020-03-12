@@ -17,4 +17,4 @@
 <p align="center">Also join our <a href="https://t.me/PPE_Support">Telegram Support Group</a> for help and support!</p>
 <p align="center">&nbsp;</p>
 <h2 align="center">License</h2>
-<p align="center"><a href="https://github.com/mkaraniya/OpenUserBot/blob/sql-extended/LICENSE">Raphielscape Public License</a> - Version 1.c, June 2019</p>
+<p align="center"><a href="https://github.com/aone-id/aone-kangbot/blob/sql-extended/LICENSE">Raphielscape Public License</a> - Version 1.d, February 2020</p>
