@@ -15,6 +15,7 @@ from selenium.webdriver.chrome.options import Options
 from userbot.events import register
 from userbot import GOOGLE_CHROME_BIN, CHROME_DRIVER, CMD_HELP
 
+HTTP = "https://"
 
 @register(pattern=r".ss (.*)", outgoing=True)
 async def capture(url):
@@ -34,9 +35,11 @@ async def capture(url):
     link_match = match(r'\bhttps?://.*\.\S+', input_str)
     if link_match:
         link = link_match.group()
+        await url.edit("`Please Wait`")
     else:
-        await url.edit("`I need a valid link to take screenshots from.`")
-        return
+        await url.edit("`Fixing your URL`")
+        link = HTTP + input_str
+
     driver.get(link)
     height = driver.execute_script(
         "return Math.max(document.body.scrollHeight, document.body.offsetHeight, document.documentElement.clientHeight, document.documentElement.scrollHeight, document.documentElement.offsetHeight);"
@@ -71,5 +74,5 @@ CMD_HELP.update({
     "ss":
     ".ss <url>\
     \nUsage: Takes a screenshot of a website and sends the screenshot.\
-    \nExample of a valid URL : `https://www.google.com`"
+    \nExample of a valid URL : `https://www.google.com` `google.com`"
 })
