@@ -5,6 +5,9 @@
 #
 """ Userbot module which contains afk-related commands """
 
+from datetime import datetime
+import pytz
+
 from random import choice, randint
 from asyncio import sleep
 
@@ -41,6 +44,13 @@ AFKSTR = [
     "I am not here right now...\nbut if I was...\n\nwouldn't that be awesome?",
 ]
 # =================================================================
+# Set time variable
+
+tz_ID = pytz.timezone('Asia/Jakarta') 
+datetime_ID = datetime.now(tz_ID)
+afk_time = datetime_ID.strftime("%H:%M")
+
+# =================================================================
 
 
 @register(incoming=True, disable_edited=True)
@@ -54,7 +64,8 @@ async def mention_afk(mention):
             if mention.sender_id not in USERS:
                 if AFKREASON:
                     await mention.reply(f"I'm AFK right now.\
-                        \nBecause I'm `{AFKREASON}`")
+                    \nSince `{afk_time} WIB/UTC+7.`\
+                        \nBecause I'm `{AFKREASON}.`")
                 else:
                     await mention.reply(str(choice(AFKSTR)))
                 USERS.update({mention.sender_id: 1})
@@ -63,7 +74,8 @@ async def mention_afk(mention):
                 if USERS[mention.sender_id] % randint(2, 4) == 0:
                     if AFKREASON:
                         await mention.reply(f"I'm still AFK.\
-                            \nReason: `{AFKREASON}`")
+                            \nSince `{afk_time} WIB/UTC+7.`\
+                            \nReason: `{AFKREASON}.`")
                     else:
                         await mention.reply(str(choice(AFKSTR)))
                     USERS[mention.sender_id] = USERS[mention.sender_id] + 1
@@ -89,11 +101,12 @@ async def afk_on_pm(sender):
                 apprv = True
         else:
             apprv = True
-        if apprv and ISAFK:
+        if apprv is True and ISAFK:
             if sender.sender_id not in USERS:
                 if AFKREASON:
                     await sender.reply(f"I'm AFK right now.\
-                    \nReason: `{AFKREASON}`")
+                    \nSince `{afk_time} WIB/UTC+7.`\
+                    \nReason: `{AFKREASON}.`")
                 else:
                     await sender.reply(str(choice(AFKSTR)))
                 USERS.update({sender.sender_id: 1})
@@ -102,7 +115,8 @@ async def afk_on_pm(sender):
                 if USERS[sender.sender_id] % randint(2, 4) == 0:
                     if AFKREASON:
                         await sender.reply(f"I'm still AFK.\
-                        \nReason: `{AFKREASON}`")
+                        \nSince `{afk_time} WIB/UTC+7.`\
+                        \nReason: `{AFKREASON}.`")
                     else:
                         await sender.reply(str(choice(AFKSTR)))
                     USERS[sender.sender_id] = USERS[sender.sender_id] + 1
