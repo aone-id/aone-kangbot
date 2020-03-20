@@ -72,6 +72,10 @@ HEROKU_MEMEZ = sb(os.environ.get("HEROKU_MEMEZ", "False"))
 HEROKU_APPNAME = os.environ.get("HEROKU_APPNAME", None)
 HEROKU_APIKEY = os.environ.get("HEROKU_APIKEY", None)
 
+# Github Credentials for updater and Gitupload.
+GIT_REPO_NAME = os.environ.get("GIT_REPO_NAME", None)
+GITHUB_ACCESS_TOKEN = os.environ.get("GITHUB_ACCESS_TOKEN", None)
+
 # Custom (forked) repo URL for updater.
 UPSTREAM_REPO_URL = os.environ.get(
     "UPSTREAM_REPO_URL",
