@@ -22,7 +22,7 @@ httplib2==0.15.0
 humanize
 lxml
 oauth2client
-Pillow>=5.3.0
+Pillow>=6.0.0
 psycopg2
 psycopg2-binary
 pybase64>=0.4.0
@@ -45,3 +45,6 @@ coffeehouse>=2.1.0
 git+https://github.com/johnwmillr/LyricsGenius.git
 lyricsgenius
 telegraph
+coffeehouse
+PyGithub
+python-dateutil
