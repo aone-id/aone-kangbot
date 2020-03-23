@@ -45,6 +45,5 @@ coffeehouse>=2.1.0
 git+https://github.com/johnwmillr/LyricsGenius.git
 lyricsgenius
 telegraph
-coffeehouse
 PyGithub
 python-dateutil
