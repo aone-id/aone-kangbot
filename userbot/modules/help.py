@@ -19,10 +19,18 @@ async def help(event):
         else:
             await event.edit("Please specify a valid module name.")
     else:
-        await event.edit("Please specify which module do you want help for !!\
-            \nUsage: .help <module name>")
+        head = "**Help for** [Aone-Kangbot](https://github.com/aone-id/aone-kangbot)"
+        head2 = "For more information to use command,"
+        head3 = "send `.help <module name>`"
+        head4 = "List for all available command below: "
         string = ""
+        separator = "••••••••••••••••••••••••••••••••••••••••••••••"
         for i in CMD_HELP:
             string += "`" + str(i)
-            string += "`\n"
-        await event.reply(string)
+            string += "`, "
+        await event.edit(f"{head}\
+              \n{head2}\
+              \n{head3}\
+              \n{separator}\
+              \n{head4}\
+              \n\n{string}")
