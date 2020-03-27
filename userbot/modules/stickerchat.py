@@ -38,7 +38,8 @@ if 1 == 1:
         "admin": "admin",
         "creator": "creator",
         "hidden": "hidden",
-        "channel": "Channel"
+        "channel": "Channel",
+        "kang": "`This is cool word, let me kang it`"
     }
 
     config = dict({"api_url": "http://api.antiddos.systems",
@@ -51,7 +52,7 @@ if 1 == 1:
         """Quote a message.
         Usage: .pch [template]
         If template is missing, possible templates are fetched."""
-        await message.delete()
+        await message.edit(strings["kang"])
         args = message.raw_text.split(" ")[1:]
         if args == []:
             args = ["default"]
@@ -173,6 +174,7 @@ if 1 == 1:
             sticker.name = "sticker.webp"
             sticker.seek(0)
             try:
+                await message.delete()
                 await reply.reply(file=sticker)
             except telethon.errors.rpcerrorlist.ChatSendStickersForbiddenError:
                 await message.respond(strings["cannot_send_stickers"])
