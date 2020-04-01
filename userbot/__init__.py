@@ -6,7 +6,6 @@
 """ Userbot initialization. """
 
 import os
-import datetime
 
 from sys import version_info
 from logging import basicConfig, getLogger, INFO, DEBUG
