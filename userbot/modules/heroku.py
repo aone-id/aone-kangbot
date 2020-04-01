@@ -10,10 +10,10 @@ import asyncio
 from asyncio import create_subprocess_shell as asyncSubprocess
 from asyncio.subprocess import PIPE as asyncPIPE
 
-from userbot import CMD_HELP, LOGS, HEROKU_APPNAME, HEROKU_APIKEY
+from userbot import CMD_HELP, LOGS, HEROKU_APP_NAME, HEROKU_API_KEY
 from userbot.events import register
 
-Heroku = heroku3.from_key(HEROKU_APIKEY)
+Heroku = heroku3.from_key(HEROKU_API_KEY)
 
 
 async def subprocess_run(cmd, heroku):
@@ -35,7 +35,7 @@ async def heroku_manager(heroku):
     await heroku.edit("`Processing...`")
     await asyncio.sleep(3)
     conf = heroku.pattern_match.group(1)
-    result = await subprocess_run(f'heroku ps -a {HEROKU_APPNAME}', heroku)
+    result = await subprocess_run(f'heroku ps -a {HEROKU_APP_NAME}', heroku)
     if result[2] != 0:
         return
     hours_remaining = result[0]
