@@ -24,13 +24,16 @@ async def help(event):
         head3 = "send `.help <module name>`"
         head4 = "List for all available command below: "
         string = ""
-        separator = "••••••••••••••••••••••••••••••••••••••••••••••"
+        sep1 = "••••••••••••••••••••••••••••••••••••••••••••••"
+        sep2 = "========================================="
         for i in CMD_HELP:
             string += "`" + str(i)
-            string += "`, "
+            string += "`  |  "
         await event.edit(f"{head}\
+              \n{sep2}\
               \n{head2}\
               \n{head3}\
-              \n{separator}\
+              \n{sep2}\
               \n{head4}\
-              \n\n{string}")
+              \n\n{string}\
+              \n{sep1}")
