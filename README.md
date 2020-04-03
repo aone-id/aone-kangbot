@@ -6,7 +6,7 @@
 <p align="center">&nbsp;</p>
 <h2 align="center">How To Host</h2>
 <h5 align="center">The easiest way to deploy this derpfest! is click on the image below</h5>
-<p align="center"><a href="https://heroku.com/deploy?template=https://github.com/aone-id/aone-kangbot/tree/sql-extended"> <img src="https://telegra.ph/file/e30939254c9ece5233ee0.jpg" alt="Deploy to Heroku" /></a></p>
+<p align="center"><a href="https://heroku.com/deploy?template=https://github.com/aone-id/aone-kangbot/tree/sql-extended"> <img src="https://github.com/aone-id/aone-kangbot/blob/sql-extended/aoneid.png?raw=true" alt="Deploy to Heroku" /></a></p>
 <p align="center">&nbsp;</p>
 <h2 align="center">Credits</h2>
 <p align="center">Huge thanks to <a href="https://github.com/aone-id/aone-kangbot/graphs/contributors">everyone</a> who have helped make this userbot awesome!!</p>
