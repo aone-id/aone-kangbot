@@ -55,6 +55,9 @@ def register(**args):
     if "insecure" in args:
         del args['insecure']
 
+    if "insecure" in args:
+        del args['insecure']
+
     if pattern:
         if not ignore_unsafe:
             args['pattern'] = pattern.replace('^.', unsafe_pattern, 1)
@@ -84,6 +87,10 @@ def register(**args):
            
             if groups_only and not check.is_group:
                 await check.respond("`I don't think this is a group.`")
+                return
+
+            if check.via_bot_id and not insecure:
+                await check.respond("`Inline bots are disabled for security reasons`")
                 return
 
             try:
