@@ -635,6 +635,10 @@ SLAP_TEMPLATES_ID = [
     "Melemparkan {item} kepada {victim}.",
     "Menampar {victim} menggunakan {item}.",
     "Membuang {victim} Ke udara.",
+    "Menghapus {victim} Dari Daftar Teman.",
+    "Melemparkan {item} {where} {victim}.",
+    "Meletakan {item} {where} {victim}.",
+    "Menyerang {victim} menggunakan {anime}.",
     "Mengehack Seluruh akun {victim}"
 ]
 
@@ -677,6 +681,15 @@ ITEMS_ID = [
     "Matahari",
     "Meteor",
     "Berkas Kantor",
+    "Beton panas",
+    "Cermin",
+    "Batu Giok",
+    "Botol",
+    "Nezuko",
+    "Kaset Pita",
+    "Tiang Jemuran",
+    "Pisau Lipat",
+    "Bongkahan Es ",
     "Asteroid",
 ]
 
@@ -691,8 +704,18 @@ HIT_ID = [
     "Memukuli",
 ]
 
+
 WHERE_ID = ["di pipi", "di kepala", "di bokong", "di badan"]
 
+JUTSU = [
+       "Futon Rasen Shuriken",
+       "Rasengan",
+       "Chidori",
+       "Chibaku Tensei",
+       "Gomu Gomu no Kong Gun",
+       "Karyuu no Hokou",
+       "KAA MEE HAA MEE HAA",
+]
 # ===========================================
 
 
@@ -791,6 +814,8 @@ async def slap(replied_user, event):
        hit = choice(HIT_ID)
        throw = choice(THROW_ID)
        where = choice(WHERE_ID)
+    elif slap_str == "jutsu":
+       jutsu = choice(JUTSU)
     else:
        temp = choice(SLAP_TEMPLATES_EN)
        item = choice(ITEMS_EN)
@@ -799,7 +824,7 @@ async def slap(replied_user, event):
        where = choice(WHERE_EN)
 
     caption = "..." + temp.format(
-        victim=slapped, item=item, hits=hit, throws=throw, where=where)
+        victim=slapped, item=item, hits=hit, throws=throw, where=where, jutsu=jutsu)
 
     return caption
 
@@ -1275,7 +1300,7 @@ CMD_HELP.update({
 \nUsage: UwU\
 \n\n.react\
 \nUsage: Make your userbot react to everything.\
-\n\n.slap <id/en>\
+\n\n.slap <id/en/jutsu>\
 \nUsage: reply to slap them with random objects !!\
 \n\n.cry\
 \nUsage: y u du dis, i cri.\
