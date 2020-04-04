@@ -691,18 +691,40 @@ HIT_ID = [
     "Memukuli",
 ]
 
-
 WHERE_ID = ["di pipi", "di kepala", "di bokong", "di badan"]
 
-JUTSU = [
-       "Futon Rasen Shuriken",
-       "Rasengan",
-       "Chidori",
-       "Chibaku Tensei",
-       "Gomu Gomu no Kong Gun",
-       "Karyuu no Hokou",
-       "KAA MEE HAA MEE HAA",
+
+SLAP_TEMPLATES_Jutsu = [
+    "Menyerang {victim} Menggunakan {hits}.",
+    "Menyerang {victim} Menggunakan {item}.",
+    "Melemparkan {throws} kepada {victim} .",
+    "Melemparkan {throws} {where} {victim}."
 ]
+
+ITEMS_Jutsu = [
+     "KAA MEE HAA MEE HAA",
+     "Chibaku Tensei",
+]
+
+THROW_Jutsu = [
+    "Futon Rasen Shuriken",
+    "Shuriken",
+]
+
+HIT_Jutsu = [
+    "Rasengan",
+    "Chidori",
+]
+
+
+WHERE_Jutsu = ["Di Pipi", "Di Kepala", "Di Bokong", "Di Badan ,Di Pantat"]
+
+
+       
+#"Gomu Gomu no Kong Gun" Kagak tau,
+#"Karyuu no Hokou" Kagak tau,
+      
+
 # ===========================================
 
 
@@ -802,7 +824,11 @@ async def slap(replied_user, event):
        throw = choice(THROW_ID)
        where = choice(WHERE_ID)
     elif slap_str == "jutsu":
-       jutsu = choice(JUTSU)
+       temp = choice(SLAP_TEMPLATES_Jutsu)
+       item = choice(ITEMS_Jutsu)
+       hit = choice(HIT_Jutsu)
+       throw = choice(THROW_Jutsu)
+       where = choice(WHERE_Jutsu)
     else:
        temp = choice(SLAP_TEMPLATES_EN)
        item = choice(ITEMS_EN)
@@ -811,7 +837,7 @@ async def slap(replied_user, event):
        where = choice(WHERE_EN)
 
     caption = "..." + temp.format(
-        victim=slapped, item=item, hits=hit, throws=throw, where=where, jutsu=jutsu)
+        victim=slapped, item=item, hits=hit, throws=throw, where=where)
 
     return caption
 
