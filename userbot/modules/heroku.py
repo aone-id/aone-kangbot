@@ -7,7 +7,7 @@
 import heroku3
 import asyncio
 
-from userbot import CMD_HELP, LOGS, HEROKU_APP_NAME, HEROKU_API_KEY
+from userbot import CMD_HELP, LOGS, HEROKU_APP_NAME, HEROKU_API_KEY, BOTLOG, BOTLOG_CHATID
 from userbot.events import register
 
 heroku_conn = heroku3.from_key(HEROKU_API_KEY)
@@ -34,7 +34,11 @@ async def heroku_list(list):
                 app = heroku_conn.apps()[HEROKU_APP_NAME]
                 config = str(app.config())
                 vlist = config.replace(",", "\n\n").replace("'", "`").replace("{", "").replace("}", "")
-                await list.edit(f"**List Config Variable on Your {HEROKU_APP_NAME}:**\n\n{vlist}")
+                if BOTLOG:
+                    await list.edit(f"List of `Config Variable` has been sent to your `BOTLOG Group`")
+                    await list.client.send_message(BOTLOG_CHATID, (f"**List Config Variable on Your {HEROKU_APP_NAME}:**\n\n{vlist}"))
+                else:
+                    await list.edit(f"Sorry, Can't send `Config Variable` to Public.\nPlease setup your **BOTLOG Group**")
             else:
                 await list.edit("Please setup your **HEROKU_APP_NAME** Config Variable")
         else:
