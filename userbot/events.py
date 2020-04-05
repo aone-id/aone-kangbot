@@ -68,7 +68,7 @@ def register(**args):
                 return
             if check.via_bot_id and not insecure:
                 if check.out:
-                    LOGS.warn("WARNING: Potentially mallicious inline bot found! [Bot ID: {check.via_bot_id}]")
+                    LOGS.info("WARNING: Potentially mallicious inline bot found! [Bot ID: {check.via_bot_id}]")
                     return
 
             try:
