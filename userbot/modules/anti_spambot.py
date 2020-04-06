@@ -132,16 +132,18 @@ async def ANTI_SPAMBOT(welcm):
                 creator = chat.creator
                 if not admin and not creator:
                     if ANTI_SPAMBOT_SHOUT:
+                        kicked = False
+                        reported = True
                         await welcm.reply(
                             "@admins\n"
                             "`ANTI SPAMBOT DETECTOR!\n"
                             "THIS USER MATCHES MY ALGORITHMS AS A SPAMBOT!`"
                             f"REASON: {reason}")
-                        kicked = False
-                        reported = True
+
                 else:
                     try:
-
+                        kicked = True
+                        reported = False
                         await welcm.reply(
                             "`Potential Spambot Detected !!`\n"
                             f"`REASON:` {reason}\n"
@@ -151,18 +153,18 @@ async def ANTI_SPAMBOT(welcm):
 
                         await welcm.client.kick_participant(
                             welcm.chat_id, check_user.id)
-                        kicked = True
-                        reported = False
+
 
                     except BaseException:
                         if ANTI_SPAMBOT_SHOUT:
+                            kicked = False
+                            reported = True
                             await welcm.reply(
                                 "@admins\n"
                                 "`ANTI SPAMBOT DETECTOR!\n"
                                 "THIS USER MATCHES MY ALGORITHMS AS A SPAMBOT!`"
                                 f"REASON: {reason}")
-                            kicked = False
-                            reported = True
+
 
                 if BOTLOG:
                     if kicked or reported:
