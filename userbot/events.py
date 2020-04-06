@@ -92,17 +92,16 @@ def register(**args):
                 if not disable_errors:
                     date = strftime("%Y-%m-%d %H:%M:%S", gmtime())
 
-                    text = "**USERBOT ERROR REPORT**\n"
-                    link = "[OUB Support Chat](https://t.me/PPE_Support)"
+                    text = "**AONE-KANGBOT ERROR REPORT**\n"
                     text += "If you want to, you can report it"
-                    text += f"- just forward this message to {link}.\n"
+                    text += f"- just forward this message to @azrim89 , @Yincen or @ThisIsTag.\n"
                     text += "Nothing is logged except the fact of error and date\n"
 
                     ftext = "========== DISCLAIMER =========="
                     ftext += "\nThis file uploaded ONLY here,"
                     ftext += "\nwe logged only fact of error and date,"
                     ftext += "\nwe respect your privacy,"
-                    ftext += "\nyou may not report this error if you've"
+                    ftext += "\nyou may not report this error if you want "
                     ftext += "\nany confidential data here, no one will see your data\n"
                     ftext += "================================\n\n"
                     ftext += "--------BEGIN USERBOT TRACEBACK LOG--------\n"
