@@ -720,10 +720,10 @@ HIT_Jutsu = [
 WHERE_Jutsu = ["Di Pipi", "Di Kepala", "Di Bokong", "Di Badan ,Di Pantat"]
 
 
-       
+
 #"Gomu Gomu no Kong Gun" Kagak tau,
 #"Karyuu no Hokou" Kagak tau,
-      
+
 
 # ===========================================
 
@@ -1213,17 +1213,17 @@ async def scam(event):
     ]
     input_str = event.pattern_match.group(1)
     args = input_str.split()
-    if len(args) is 0:  # Let bot decide action and time
+    if len(args) == 0:  # Let bot decide action and time
         scam_action = choice(options)
         scam_time = randint(30, 60)
-    elif len(args) is 1:  # User decides time/action, bot decides the other.
+    elif len(args) == 1:  # User decides time/action, bot decides the other.
         try:
             scam_action = str(args[0]).lower()
             scam_time = randint(30, 60)
         except ValueError:
             scam_action = choice(options)
             scam_time = int(args[0])
-    elif len(args) is 2:  # User decides both action and time
+    elif len(args) == 2:  # User decides both action and time
         scam_action = str(args[0]).lower()
         scam_time = int(args[1])
     else:
