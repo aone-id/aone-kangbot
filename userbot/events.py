@@ -15,7 +15,7 @@ from traceback import format_exc
 
 from telethon import events
 
-from userbot import LOGS, bot
+from userbot import LOGS, LOGSPAMMER, BOTLOG, BOTLOG_CHATID, bot
 
 
 def register(**args):
@@ -42,7 +42,7 @@ def register(**args):
 
     if "disable_errors" in args:
         del args['disable_errors']
-    
+
     if "insecure" in args:
         del args['insecure']
 
