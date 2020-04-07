@@ -19,7 +19,6 @@ RUN apk add --no-cache=true --update \
     gcc \
     g++ \
     git \
-    sudo \
     aria2 \
     util-linux \
     libevent \
