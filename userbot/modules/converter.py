@@ -106,7 +106,7 @@ async def convert_video(mp4):
 
 
 @register(outgoing=True, pattern=r"^.tomp3(?: |$)(.*)")
-async def convert_video(mp3):
+async def convert_music(mp3):
     if mp3.fwd_from:
         return
     if not mp3.is_reply:
@@ -153,6 +153,54 @@ async def convert_video(mp3):
         await mp3.delete()
 
 
+@register(outgoing=True, pattern=r"^.toflac(?: |$)(.*)")
+async def convert_musicac(flac):
+    if flac.fwd_from:
+        return
+    if not flac.is_reply:
+        await flac.edit("Reply to a media to convert it.")
+        return
+    moneac = await flac.edit("Processing ...")
+    if not os.path.isdir(TEMP_DOWNLOAD_DIRECTORY):
+        os.makedirs(TEMP_DOWNLOAD_DIRECTORY)
+    if flac.reply_to_msg_id:
+        reply_message = await flac.get_reply_message()
+        try:
+            c_time = time.time()
+            downloaded_file_nameac = await bot.download_media(
+                reply_message,
+                TEMP_DOWNLOAD_DIRECTORY,
+                progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
+                    progress(d, t, moneac, c_time, "trying to download")
+                )
+            )
+            directory_nameac = downloaded_file_nameac + ".flac"
+            await flac.edit("`Converting your media....`")
+            ff = ffmpy.FFmpeg(
+                inputs = {downloaded_file_nameac : None},
+                outputs = {directory_nameac : '-y -vn -acodec flac -ar 16000 -ac 1'})
+            ff.run()
+
+        except Exception as e:  # pylint:disable=C0103,W0703
+            await moneac.edit(str(e))
+
+        except ValueError as e:
+            await moneac.edit(str(e))
+
+        await asyncio.sleep(7)
+        await bot.send_file(
+            flac.chat_id,
+            directory_nameac,
+            caption="`Enjoy your Music`",
+            force_document=True,
+            allow_cache=False,
+            reply_to=flac.message.id,
+        )
+        os.remove(directory_nameac)
+        os.remove(downloaded_file_nameac)
+        await flac.delete()
+
+
 CMD_HELP.update({
     "converter":
     ".togif\
@@ -160,5 +208,7 @@ CMD_HELP.update({
     \n.tomp4\
     \nUsage: Reply to media to convert as mp4.\
     \n.tomp3\
-    \nUsage: Reply to media to convert as mp3."
+    \nUsage: Reply to media to convert as mp3.\
+    \n.toflac\
+    \nUsage: Reply to media to convert as flac."
 })
