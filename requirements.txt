@@ -8,6 +8,7 @@ covid
 cffi>=1.0.0
 dnspython
 emoji
+ffmpy
 gitpython
 google-api-python-client
 google-auth-oauthlib
