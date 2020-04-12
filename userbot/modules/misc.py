@@ -93,7 +93,8 @@ async def bot_support(wannahelp):
 
 @register(outgoing=True, pattern="^.creator$")
 async def creator(e):
-    await e.edit("[TeKnoways](https://t.me/Three_Cube_TeKnoways)")
+    await e.edit("Based OpenUserbot[TeKnoways](https://t.me/Three_Cube_TeKnoways)\naone-kangbot by [aone-id](https://aone-id.github.io/) ")
+
 
 
 @register(outgoing=True, pattern="^.readme$")

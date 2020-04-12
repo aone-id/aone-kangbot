@@ -1418,6 +1418,11 @@ async def nou(e):
                      "`\n┫┈┈  NoU\n┃┈╰╰━━━━╯`"
 "`\n┗━━┻━┛`")
 
+@register(outgoing=True, pattern="^.tolol$")
+async def tolol(e):
+   if not e.text[0].isalpha() and e.text[0] not in ("/", "#", "@", "!"):
+        await e.edit("`\n░▀█▀░▄▀▄░█▒░░▄▀▄░█▒░`"
+                     "`\n░▒█▒░▀▄▀▒█▄▄░▀▄▀▒█▄▄`")
 
 CMD_HELP.update({
     "memes":
@@ -1483,7 +1488,7 @@ CMD_HELP.update({
 \n[Available Actions: (typing, contact, game, location, voice, round, video, photo, document, cancel)]\
 \nUsage: Create fake chat actions, for fun. (Default action: typing)\
 \n\nAnd many more\
-\n.nou ; .bot ; .gey ; .gey ; .tf ; .paw ; .taco ; .nih ;\
+\n.nou ; .bot ; .gey ; .gey ; .tf ; .paw ; .taco ; .nih ; .tolol\
 \n.fag ; .gtfo ; .stfu ; .lol ; .lool ; .fail ; .love\
 \n.rain ; .earth ; .iwi ; .sayhi\
 \n\n\nThanks to 🅱️ottom🅱️ext🅱️ot (@NotAMemeBot) for some of these."
