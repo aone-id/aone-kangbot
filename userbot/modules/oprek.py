@@ -84,7 +84,7 @@ async def _(event):
               await conv.send_message(f'/{recovery} {link}')
               response = await response
           except YouBlockedUserError:
-              await event.reply("```Unblock @ofoxr_bot plox```")
+              await event.reply("```Unblock @XiaomiGeeksBot plox```")
               return
           else:
              await event.delete()
@@ -106,7 +106,7 @@ async def _(event):
               await conv.send_message(f'/{spec} {link}')
               response = await response
           except YouBlockedUserError:
-              await event.reply("```Unblock @ofoxr_bot plox```")
+              await event.reply("```Unblock @XiaomiGeeksBot plox```")
               return
           else:
              await event.delete()
@@ -127,7 +127,28 @@ async def _(event):
               await conv.send_message(f'/{pitch} {link}')
               response = await response
           except YouBlockedUserError:
-              await event.reply("```Unblock @ofoxr_bot plox```")
+              await event.reply("```Unblock @XiaomiGeeksBot plox```")
+              return
+          else:
+             await event.delete()
+             await bot.forward_messages(event.chat_id, response.message)
+                
+                
+@register(outgoing=True, pattern="^.of(?: |$)(.*)")
+async def _(event):
+    if event.fwd_from:
+        return
+    link = event.pattern_match.group(1)
+    chat = "@XiaomiGeeksBot"
+    ofox = f"of"
+    await event.edit("```Processing```")
+    async with bot.conversation("@XiaomiGeeksBot") as conv:
+          try:
+              response = conv.wait_event(events.NewMessage(incoming=True,from_users=774181428))
+              await conv.send_message(f'/{oofox} {link}')
+              response = await response
+          except YouBlockedUserError:
+              await event.reply("```Unblock @XiaomiGeeksBot plox```")
               return
           else:
              await event.delete()
@@ -136,13 +157,15 @@ async def _(event):
 CMD_HELP.update({
 "oprek":
 "For Xiaomeme devices only!\
-.firmware (codename)\
-     \n\nUsage : Get lastest Firmware\
-.pb (codename)\
-     \n\nUsage : Get latest PBRP\
-.spec (codename)\
-     \n\nUsage : Get quick spec information about device\
-.fastboot (codename)\
-     \n\nUsage : Get latest fastboot MIUI\
-.recovery (codename))\
-     \n\nUsage : Get latest recovery MIUI"})
+\n\n.firmware (codename)\
+     \nUsage : Get lastest Firmware\
+\n\n.pb (codename)\
+     \nUsage : Get latest PBRP\
+\n\n.spec (codename)\
+     \nUsage : Get quick spec information about device\
+\n\n.fastboot (codename)\
+     \nUsage : Get latest fastboot MIUI\
+\n\n.recovery (codename)\
+     \nUsage : Get latest recovery MIUI\
+\n\n.of (codename)\
+     \nUsage : Get latest OFRP"})
