@@ -145,7 +145,7 @@ async def _(event):
     async with bot.conversation("@XiaomiGeeksBot") as conv:
           try:
               response = conv.wait_event(events.NewMessage(incoming=True,from_users=774181428))
-              await conv.send_message(f'/{oofox} {link}')
+              await conv.send_message(f'/{ofox} {link}')
               response = await response
           except YouBlockedUserError:
               await event.reply("```Unblock @XiaomiGeeksBot plox```")
@@ -168,4 +168,4 @@ CMD_HELP.update({
 \n\n.recovery (codename)\
      \nUsage : Get latest recovery MIUI\
 \n\n.of (codename)\
-     \nUsage : Get latest OFRP"})
+     \nUsage : Get latest ORangeFox Recovery"})
