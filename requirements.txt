@@ -4,8 +4,8 @@ async_generator
 bs4
 cowpy
 covid
-# cryptg
 cffi>=1.0.0
+cryptg
 dnspython
 emoji
 ffmpy
