@@ -68,14 +68,6 @@ def register(**args):
                 # Messages sent in channels can be edited by other users.
                 # Ignore edits that take place in channels.
                 return
-                       
-            #if check.via_bot_id and not trigger_on_inline:
-             #   return
-             
-            if check.via_bot_id and not insecure and check.out:
-                # Ignore outgoing messages via inline bots for security reasons
-                return
-       
             if not LOGSPAMMER:
                 send_to = check.chat_id
             else:
@@ -84,12 +76,11 @@ def register(**args):
             if not trigger_on_fwd and check.fwd_from:
                 return
 
-           
             if groups_only and not check.is_group:
                 await check.respond("`I don't think this is a group.`")
                 return
 
-            if check.via_bot_id and not insecure:
+            if check.via_bot_id and not insecure and check.out:
                 return
 
             try:
