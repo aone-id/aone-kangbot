@@ -38,6 +38,10 @@ if LYDIA_API_KEY:
 
 @register(outgoing=True, pattern="^.repcf$")
 async def repcf(event):
+    #Prevent Channel Bug to use repc
+    if event.is_channel and not event.is_group:
+        await event.edit("`repc Commad isn't permitted on channels`")
+        return
     if event.fwd_from:
         return
     await event.edit("Processing...")
@@ -53,6 +57,10 @@ async def repcf(event):
 
 @register(outgoing=True, pattern="^.addcf$")
 async def addcf(event):
+     #Prevent Channel Bug to use addcf
+    if event.is_channel and not event.is_group:
+        await event.edit("`addcf Commad isn't permitted on channels`")
+        return
     if event.fwd_from:
         return
     await event.edit("Running on Non-SQL mode for now...")
@@ -71,6 +79,10 @@ async def addcf(event):
 
 @register(outgoing=True, pattern="^.remcf$")
 async def remcf(event):
+         #Prevent Channel Bug to use remcf
+    if event.is_channel and not event.is_group:
+        await event.edit("`remcf Commad isn't permitted on channels`")
+        return
     if event.fwd_from:
         return
     await event.edit("Running on Non-SQL mode for now...")
