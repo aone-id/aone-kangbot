@@ -14,7 +14,8 @@
 # You should have received a copy of the GNU General Public License
 # along with TG-UserBot.  If not, see <https://www.gnu.org/licenses/>.
 
-from .chrome import chrome
+from .chrome import chrome, options
+from .google_images_download import googleimagesdownload
 from .progress import progress
 
 from .tools import (
