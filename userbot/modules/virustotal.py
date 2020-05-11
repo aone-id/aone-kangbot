@@ -48,8 +48,8 @@ async def _(event):
         return
     link = event.pattern_match.group(1)
     chat = "@VirusTotalESPBot"
-    url = f"url"
-    await event.edit("Url Scanning By Virus Total")
+    url = f"scan"
+    await event.edit("URL Scanning By Virus Total")
     async with bot.conversation("@VirusTotalESPBot") as conv:
           try:
               response = conv.wait_event(events.NewMessage(incoming=True,from_users=276396917))
