@@ -8,9 +8,15 @@ from userbot.events import register
 import time
 import os
 from userbot import TEMP_DOWNLOAD_DIRECTORY ,bot
-from userbot import CMD_HELP
+from userbot import CMD_HELP,ALIVE_NAME
 # from uniborg.util import admin_cmd, humanbytes, progress, time_formatter
 from userbot.util import admin_cmd, humanbytes, progress, time_formatter
+
+
+# ================= CONSTANT =================
+DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else uname().node
+# ============================================
+
 
 #  @borg.on(admin_cmd("compress"))
 @register(outgoing=True, pattern=r"^.compress(?: |$)(.*)")
@@ -46,7 +52,7 @@ async def _(event):
     await bot.send_file(
         event.chat_id,
         directory_name + ".zip",
-        caption="Zipped By EyePatch",
+        caption="Zipped By {DEFAULTUSER}",
         force_document=True,
         allow_cache=False,
         reply_to=event.message.id,
