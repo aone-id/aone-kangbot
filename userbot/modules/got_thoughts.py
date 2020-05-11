@@ -20,6 +20,10 @@ async def _(event):
     if event.fwd_from:
 
         return
+        
+    if event.is_channel and not event.is_group:
+        return
+        
     await event.edit("Typing...")
 
     await asyncio.sleep(3)

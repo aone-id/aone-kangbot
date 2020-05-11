@@ -11,6 +11,8 @@ from userbot.events import register
 async def hazmat(event):
     if event.fwd_from:
         return
+    if event.is_channel and not event.is_group:
+        return
     if not event.reply_to_msg_id:
        await event.edit("`WoWoWo Capt!, we are not going suit a ghost!...`")
        return
