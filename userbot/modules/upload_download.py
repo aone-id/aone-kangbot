@@ -29,7 +29,7 @@ from pyDownload import Downloader
 from pydrive2.auth import GoogleAuth
 from pydrive2.drive import GoogleDrive
 from telethon.tl.types import DocumentAttributeVideo, MessageMediaPhoto
-from userbot import GDRIVE_FOLDER_ID as GDRIVE_FOLDER
+from userbot import G_DRIVE_FOLDER_ID as GDRIVE_FOLDER
 from userbot import LOGS, CMD_HELP, TEMP_DOWNLOAD_DIRECTORY
 from userbot.events import register
 
