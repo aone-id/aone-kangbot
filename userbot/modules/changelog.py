@@ -26,7 +26,7 @@ async def gen_chlog(repo, diff):
 
 
 async def is_off_br(br):
-    off_br = ['sql-extended']
+    off_br = ['test']
     for k in off_br:
         if k == br:
             return 1
@@ -57,8 +57,8 @@ async def chtream(ch):
         )
         origin = repo.create_remote('chtream', off_repo)
         origin.fetch()
-        repo.create_head('sql-extended', origin.refs.sql-extended)
-        repo.heads.sql-extended.checkout(True)
+        repo.create_head('test', origin.refs.test)
+        repo.heads.test.checkout(True)
 
     ac_br = repo.active_branch.name
     if not await is_off_br(ac_br):
