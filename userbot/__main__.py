@@ -26,10 +26,10 @@ except PhoneNumberInvalidError:
 for module_name in ALL_MODULES:
     imported_module = import_module("userbot.modules." + module_name)
 
-LOGS.info("Youre now running Aone-Kangbot")
+LOGS.info("Youre now running Aone-Kangbot v2.0")
 
 LOGS.info(
-    "😘 Congratulations, your Aone-Kangbot is now running !! Test it by typing .ping in any chat.")
+    "😘 Congratulations, your Aone-Kangbot v2.0 is now running !! Test it by typing .ping in any chat.")
 
 if len(argv) not in (1, 3, 4):
     bot.disconnect()

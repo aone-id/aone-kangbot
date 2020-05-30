@@ -75,6 +75,9 @@ async def bot_ver(event):
             await event.edit("`Userbot Version: "
                              f"{verout}"
                              "` \n"
+                             "`Aone-Kangbot Version: "
+                             f"v2.0"
+                             "` \n"
                              "`Revision: "
                              f"{revout}"
                              "`")
@@ -137,6 +140,7 @@ async def amireallyalive(alive):
                      "Aone-Kangbot is running, Enjoy! \n\n"
                      f"=============================== \n"
                      f"Telethon version: {version.__version__} \n"
+                     f"Aone-Kangbot version: v2.0 \n"
                      f"Python: {python_version()} \n"
                      f"=============================== \n\n"
                      f"User: {DEFAULTUSER} \n"
