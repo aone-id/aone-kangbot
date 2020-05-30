@@ -146,7 +146,7 @@
     },
     "TELEGRAPH_SHORT_NAME": {
       "description": "add your desired TELEGRAPH_SHORT_NAME.",
-      "value": "@Mayur_Karaniya"
+      "value": "@aone-kangbot"
     },
     "CLEAN_WELCOME": {
       "description": "When a new person joins, the old welcome message is deleted.",
@@ -186,7 +186,7 @@
     },
     "DEFAULT_BIO": {
       "description": "Default profile bio.",
-      "value": "[PM = Report Spam] I ❤ ️@OpenUserBot",
+      "value": "[PM = Report Spam] I ❤ ️@Aone-Kangbot",
       "required": false
     },
     "ALIVE_NAME": {
