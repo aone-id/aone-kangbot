@@ -19,7 +19,7 @@ DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else uname().node
 @register(outgoing=True, pattern="^.useitoub$")
 async def usit(e):
     await e.edit(
-        f"Here's something for {DEFAULTUSER} to use it for help_on_update on **OpenUserBot**:\n"
+        f"Here's something for {DEFAULTUSER} to use it for help_on_update on **A-One Kangbot**:\n"
         "\n[Windows Method](https://telegra.ph/How-to-keep-repo-updated-while-keeping-your-changes-through-windows-cmd-method-04-01)"
         "\n[Termux Method](https://telegra.ph/How-to-keep-OpenUserBot-repo-updated-while-keeping-your-changes-through-Termux-method-04-01)"
         "\n[Kali Linux Method](https://telegra.ph/How-to-keep-OpenUserBot-repo-updated-while-keeping-your-changes-through-Termux-method-04-01)"
@@ -29,7 +29,7 @@ async def usit(e):
 @register(outgoing=True, pattern="^.varoub$")
 async def var(m):
     await m.edit(
-        f"Here's a list of VARS for {DEFAULTUSER} on **OpenUserBot**:\n"
+        f"Here's a list of VARS for {DEFAULTUSER} on **A-One Kangbot**:\n"
         "\n[HEROKU VARS](https://raw.githubusercontent.com/mkaraniya/OpenUserBot/sql-extended/bin/vars%20for%20oub.txt)")
     
     
