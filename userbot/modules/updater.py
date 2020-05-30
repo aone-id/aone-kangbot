@@ -88,7 +88,7 @@ async def deploy(event, repo, ups_rem, ac_br, txt):
         if BOTLOG:
             await event.client.send_message(
                 BOTLOG_CHATID, "#UPDATE \n"
-                "Your One4uBot was successfully updated")
+                "Your Aone-kangbot  was successfully updated")
 
     else:
         await event.edit('`[HEROKU]:'
@@ -109,7 +109,7 @@ async def update(event, repo, ups_rem, ac_br):
     if BOTLOG:
             await event.client.send_message(
                 BOTLOG_CHATID, "#UPDATE \n"
-                "Your One4uBot was successfully updated")
+                "Your Aone-kangbot was successfully updated")
 
     # Spin a new instance of bot
     args = [sys.executable, "-m", "userbot"]
@@ -187,7 +187,7 @@ async def upstream(event):
             remove("output.txt")
         else:
             await event.edit(changelog_str)
-        return await event.respond('`do ".update now/deploy" to update`')
+        return await event.respond('do `.update now` or `.update deploy` to update')
 
     if force_update:
         await event.edit(
