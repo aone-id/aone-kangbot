@@ -1,6 +1,6 @@
 # Copyright (C) 2019 The Raphielscape Company LLC.
 #
-# Licensed under the Raphielscape Public License, Version 1.d (the "License");
+# Licensed under the Raphielscape Public License, Version 1.c (the "License");
 # you may not use this file except in compliance with the License.
 #
 """ Userbot help command """
@@ -19,10 +19,18 @@ async def help(event):
         else:
             await event.edit("Please specify a valid module name.")
     else:
+        head = "**Help for** [Aone-Kangbot](https://github.com/aone-id/aone-kangbot)"
+        head2 = "For more information to use command,"
+        head3 = "send `.help <module name>`"
+        head4 = "List for all available command below: "
         string = ""
+        separator = "=============================================="
         for i in CMD_HELP:
             string += "`" + str(i)
-            string += "`\t\t\t||\t\t\t "
-        await event.edit(f"{string}"
-                        "\n\nSpecify which module do you want help for !!\
-                        \n**Usage:** `.help` <module name>")
+            string += "` | "
+        await event.edit(f"{head}\
+              \n{head2}\
+              \n{head3}\
+              \n{separator}\
+              \n{head4}\
+              \n\n{string}")
