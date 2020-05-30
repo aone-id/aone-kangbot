@@ -257,7 +257,7 @@ def get_markdown(reply):
 CMD_HELP.update({
         "quotly": 
         ".q reply_message. \
-          \nUsage: Enhance ur text to sticker. \
+          \nUsage: Enhances your replied text to sticker. \
           \nNote: please add API_TOKEN and API_URL in Heroku vars. \
           \n you can get those from http://antiddos.systems/. "
     })

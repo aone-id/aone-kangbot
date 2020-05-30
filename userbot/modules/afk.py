@@ -187,7 +187,7 @@ async def mention_afk(mention):
                     await mention.reply(f"I'm still **afk since** {afk_since}.\
                             \n**Reason:** `{AFKREASON}`")
                 else:
-                    await mention.reply(f"I'm **afk Since** {afk_since}.\nReason: \n{AFKSK}\n`.` ")
+                    await mention.reply(f"**This person has been AFK since** {afk_since}.\nReason: \n{AFKSK}\n`.` ")
                 USERS.update({mention.sender_id: 1})
                 COUNT_MSG = COUNT_MSG + 1
             elif mention.sender_id in USERS:
