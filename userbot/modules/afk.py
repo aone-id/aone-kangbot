@@ -81,9 +81,9 @@ async def set_afk(afk_e):
     afk_start = start_1.replace(microsecond=0)
     if string:
         AFKREASON = string
-        await afk_e.edit(f"**Going AFK!**")
+        await afk_e.edit(f"**Gonna go AFK. I'll be right back.**")
     else:
-        await afk_e.edit("**Going AFK!**")
+        await afk_e.edit("**Gonna go AFK. I'll be right back.**")
     if user.last_name:
         await afk_e.client(UpdateProfileRequest(first_name=user.first_name, last_name=user.last_name + " [OFF]"))
     else:
@@ -116,7 +116,7 @@ async def type_afk_is_not_true(notafk):
     afk_end = back_alive.replace(microsecond=0)
     if ISAFK:
         ISAFK = False
-        msg = await notafk.edit("**I'm back !**")
+        msg = await notafk.edit("**I'm back! Did you guys miss me?**")
         time.sleep(3)
         await msg.delete()
         await notafk.client(UpdateProfileRequest(first_name=user.first_name, last_name=last1))
@@ -196,7 +196,7 @@ async def mention_afk(mention):
                         await mention.reply(f"I'm still **afk since** {afk_since}.\
                             \n**Reason:** `{AFKREASON}`")
                     else:
-                        await mention.reply(f"I'm **afk Since** {afk_since}.\nReason: \n{AFKSK}\n`.` ")
+                        await mention.reply(f"**This person has been AFK since** {afk_since}.\nReason: \n{AFKSK}\n`.` ")
                     USERS[mention.sender_id] = USERS[mention.sender_id] + 1
                     COUNT_MSG = COUNT_MSG + 1
                 else:

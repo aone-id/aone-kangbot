@@ -59,7 +59,7 @@ logger = logging.getLogger(__name__)
 @register(outgoing=True, pattern=r"^.stats(?: |$)(.*)") 
 async def stats(event: NewMessage.Event) -> None:  # pylint: disable = R0912, R0914, R0915
     """Command to get stats about the account"""
-    waiting_message = await event.edit('`Collecting stats, Wait Master`')
+    waiting_message = await event.edit('`Collecting stats, wait for a second.`')
     start_time = time.time()
     private_chats = 0
     bots = 0
@@ -114,7 +114,7 @@ async def stats(event: NewMessage.Event) -> None:  # pylint: disable = R0912, R0
     stop_time = time.time() - start_time
 
     full_name = inline_mention(await event.client.get_me())
-    response = f'🔸 **Stats for {full_name}** \n\n'
+    response = f'**Stats for {full_name}** \n\n'
     response += f'**Private Chats:** {private_chats} \n'
     response += f'   • `Users: {private_chats - bots}` \n'
     response += f'   • `Bots: {bots}` \n'
