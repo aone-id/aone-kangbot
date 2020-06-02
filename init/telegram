@@ -8,10 +8,10 @@
 #
 # Telegram command container
 
-TELEGRAM=$SEMAPHORE_PROJECT_DIR/init/telegramapi
+TELEGRAM=/home/semaphore/aone-kangbot/init/telegramapi
 export TELEGRAM
 # Caster configurations
-MAINGROUP_ID="-1001460242671"
+MAINGROUP_ID="-1001225236454"
 
 # sendcast to group
 tg_sendinfo() {
@@ -30,27 +30,16 @@ kickstart_pub() {
      "PR: <code>${PULL_REQUEST_NUMBER}</code>" \
      "Commit Point <code>${COMMIT_POINT}</code>" \
      " " \
-     "<b>Github Link: </b> https://github.com/aone-id/aone-kangbot/commit/${COMMIT_HASH}"
+     "<b>Github Link: </b> https://github.com/aone-id/aone-kangbot/commits/${COMMIT_HASH}" \
+     " " \
+     "<b>CI Link: </b> https://azrim.semaphoreci.com/projects/aone-kangbot"
   else
     tg_sendinfo "I am starting build" \
     "Branch <code>${PARSE_BRANCH}</code>" \
     "Commit Point <code>${COMMIT_POINT}</code>" \
     " " \
-    "<b>Github Link: </b> https://github.com/aone-id/aone-kangbot/commit/${COMMIT_HASH}" \
+    "<b>Github Link: </b> https://github.com/aone-id/aone-kangbot/commits/${COMMIT_HASH}" \
     " " \
-    "<b>CI Link: </b> https://semaphoreci.com/baalajimaestro/telegram-userbot"
-}
-
-kickstart_priv() {
-    tg_buildmain_sendgif
-
-    tg_debugcast "Compiler <code>${COMPILER_USED}</code>" \
-    "Device <b>${DEVICE}</b>" \
-    "Branch <code>${PARSE_BRANCH}</code>" \
-    "Commit Point <code>${COMMIT_POINT}</code>" \
-    "Under <code>$(hostname)</code>" \
-    "Started on <code>$(whoami)</code>"
-
-    tg_debugcast "This ${COMPILER_USED} build will not producing any binaries" \
-                "This is internal build"
+    "<b>CI Link: </b> https://azrim.semaphoreci.com/projects/aone-kangbot"
+fi
 }

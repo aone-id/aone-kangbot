@@ -1,0 +1,30 @@
+version: v1.0
+name: aone-id
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu1804
+blocks:
+  - name: Semaphore CI Test
+    task:
+      prologue:
+        commands:
+          - sem-version python 3.8
+          - checkout
+      jobs:
+        - name: Semaphore CI Test
+          commands:
+            - sem-service start postgres 11.5 --username=azrim --password=m --db=userbot
+            - sudo chmod -R 777 init
+            - bash init/CI_Test_Script.sh
+      secrets:
+        - name: BOT_API_KEY
+        - name: GH_PERSONAL_TOKEN
+        - name: GH_USERNAME
+        - name: BOTLOG_CHATID
+        - name: API_KEY
+        - name: API_HASH
+        - name: STRING_SESSION
+        - name: ALIVE_NAME
+        - name: DB_NAME
+        - name: DATABASE_URL
