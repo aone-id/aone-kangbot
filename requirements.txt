@@ -48,7 +48,7 @@ git+https://github.com/johnwmillr/LyricsGenius.git
 lyricsgenius
 redis>=3.3.10
 beautifulsoup4>=4.8.1
-youtube-dl>=2019.9.28
+youtube-dl>=2020.05.29
 PyGithub
 PyDrive2
 pyDownload
