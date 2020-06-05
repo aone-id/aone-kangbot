@@ -9,9 +9,10 @@ from importlib import import_module
 from sys import argv
 
 from telethon.errors.rpcerrorlist import PhoneNumberInvalidError
-from userbot import LOGS, bot
+from userbot import LOGS, bot, BOT_VERSION
 from userbot.modules import ALL_MODULES
 
+VERSION = str(BOT_VERSION)
 
 INVALID_PH = '\nERROR: The Phone No. entered is INVALID' \
              '\n Tip: Use Country Code along with number.' \
@@ -26,10 +27,10 @@ except PhoneNumberInvalidError:
 for module_name in ALL_MODULES:
     imported_module = import_module("userbot.modules." + module_name)
 
-LOGS.info("Youre now running Aone-Kangbot v2.0")
+LOGS.info(f"You're now running Aone-Kangbot v{VERSION}")
 
 LOGS.info(
-    "😘 Congratulations, your Aone-Kangbot v2.0 is now running !! Test it by typing .ping in any chat.")
+    "😘 Congratulations, your Aone-Kangbot is now running !! Test it by typing .ping in any chat.")
 
 if len(argv) not in (1, 3, 4):
     bot.disconnect()

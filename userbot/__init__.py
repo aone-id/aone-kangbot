@@ -51,14 +51,16 @@ if CONFIG_CHECK:
     )
     quit(1)
 
+# Version
+BOT_VERSION = "2.2"
+
 # Telegram App KEY and HASH
 API_KEY = os.environ.get("API_KEY", None)
 API_HASH = os.environ.get("API_HASH", None)
 
 # Photo Chat - Get this value from http://antiddos.systems
 API_TOKEN = os.environ.get("API_TOKEN", None)
-API_URL = os.environ.get("API_URL", "http://antiddos.systems")    
-    
+API_URL = os.environ.get("API_URL", "http://antiddos.systems")
 # Userbot Session String
 STRING_SESSION = os.environ.get("STRING_SESSION", None)
 # Logging channel/group ID configuration.

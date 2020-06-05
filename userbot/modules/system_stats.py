@@ -13,10 +13,11 @@ from shutil import which
 from os import remove
 from telethon import version
 
-from userbot import CMD_HELP, ALIVE_NAME
+from userbot import CMD_HELP, ALIVE_NAME, BOT_VERSION
 from userbot.events import register
 
 # ================= CONSTANT =================
+VERSION = str(BOT_VERSION)
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else uname().node
 # ============================================
 
@@ -76,14 +77,14 @@ async def bot_ver(event):
                              f"{verout}"
                              "` \n"
                              "`Aone-Kangbot Version: "
-                             f"v2.0"
+                             f"v{VERSION}"
                              "` \n"
                              "`Revision: "
                              f"{revout}"
                              "`")
         else:
             await event.edit(
-                "Shame that you don't have git, you're running - 'v2.5' anyway!"
+                "Shame that you don't have git, you're running - {VERSION} anyway!"
             )
 
 
@@ -140,7 +141,7 @@ async def amireallyalive(alive):
                      "Aone-Kangbot is running, Enjoy! \n\n"
                      f"=============================== \n"
                      f"Telethon version: {version.__version__} \n"
-                     f"Aone-Kangbot version: v2.0 \n"
+                     f"Aone-Kangbot version: {VERSION} \n"
                      f"Python: {python_version()} \n"
                      f"=============================== \n\n"
                      f"User: {DEFAULTUSER} \n"
