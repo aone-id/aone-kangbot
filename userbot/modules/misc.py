@@ -93,12 +93,12 @@ async def bot_support(wannahelp):
     """ For .support command, just returns the group link. """
     await wannahelp.edit(
         "Pm This Bot to Get Support: @Aone_Helper_Bot")
-        
+
 
 
 @register(outgoing=True, pattern="^.creator$")
 async def creator(e):
-    await e.edit("Based OpenUserbot[TeKnoways](https://t.me/Three_Cube_TeKnoways)\naone-kangbot by [aone-id](https://aone-id.github.io/) ")
+    await e.edit("aone-kangbot by [aone-id](https://aone-id.github.io/)\nBased on [OpenUserbot](https://t.me/Three_Cube_TeKnoways)")
 
 
 
@@ -113,7 +113,7 @@ async def reedme(e):
         "\n[Video Tutorial - 576p](https://mega.nz/#!ErwCESbJ!1ZvYAKdTEfb6y1FnqqiLhHH9vZg4UB2QZNYL9fbQ9vs)"
         "\n[Video Tutorial - 1080p](https://mega.nz/#!x3JVhYwR!u7Uj0nvD8_CyyARrdKrFqlZEBFTnSVEiqts36HBMr-o)"
         "\n[Special - Note](https://telegra.ph/Special-Note-11-02)")
-    
+
 
 # Copyright (c) Gegham Zakaryan | 2019
 @register(outgoing=True, pattern="^.repeat (.*)")
@@ -137,7 +137,7 @@ async def repo_is_here(wannasee):
         "Click [here](https://github.com/aone-id/aone-kangbot) to open aone-Kangbot's GitHub page."
     )
 
-    
+
 @register(outgoing=True, pattern="^.myrepo$")
 async def myrepo_is_here(wannaseeme):
     """ For .myrepo command, just returns the repo URL. """
