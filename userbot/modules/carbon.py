@@ -1,12 +1,9 @@
 import os
-import time
-import asyncio
 import random
 import asyncio
 import shutil
 from bs4 import BeautifulSoup
 import re
-from time import sleep
 from html import unescape
 from re import findall
 from selenium import webdriver
@@ -26,19 +23,13 @@ from googletrans import LANGUAGES, Translator
 from gtts import gTTS
 from gtts.lang import tts_langs
 from emoji import get_emoji_regexp
-from youtube_dl import YoutubeDL
-from youtube_dl.utils import (DownloadError, ContentTooShortError,
-                              ExtractorError, GeoRestrictedError,
-                              MaxDownloadsReached, PostProcessingError,
-                              UnavailableVideoError, XAttrMetadataError)
 from asyncio import sleep
-from userbot import CMD_HELP, BOTLOG, BOTLOG_CHATID, YOUTUBE_API_KEY, CHROME_DRIVER, GOOGLE_CHROME_BIN, bot
+from userbot import CMD_HELP, CHROME_DRIVER, GOOGLE_CHROME_BIN, bot
 from userbot.events import register
 from telethon.tl.types import DocumentAttributeAudio
 from userbot.modules.upload_download import progress, humanbytes, time_formatter
 from userbot.google_images_download import googleimagesdownload
 import subprocess
-from datetime import datetime
 
 
 CARBONLANG = "auto"
@@ -53,7 +44,7 @@ async def setlang(prog):
     await prog.edit(f"Language for carbon.now.sh set to {CARBONLANG}")
 
 @register(outgoing=True, pattern="^.carbon1")
-async def carbon_api(e):
+async def carbon_api1(e):
     """ A Wrapper for carbon.now.sh """
     await e.edit("`Processing..`")
     CARBON = 'https://carbon.now.sh/?bg=rgba(249%2C237%2C212%2C0)&t=synthwave-84&wt=none&l=application%2Fjson&ds=true&dsyoff=20px&dsblur=0px&wc=true&wa=true&pv=56px&ph=0px&ln=false&fl=1&fm=IBM%20Plex%20Mono&fs=14.5px&lh=153%25&si=false&es=4x&wm=false&code={code}'
@@ -111,7 +102,6 @@ async def carbon_api(e):
         force_document=True,
         reply_to=e.message.reply_to_msg_id,
     )
-
     os.remove('/root/userbot/.bin/carbon.png')
     driver.quit()
     # Removing carbon.png after uploading
@@ -119,7 +109,7 @@ async def carbon_api(e):
     
 
 @register(outgoing=True, pattern="^.carbon2")
-async def carbon_api(e):
+async def carbon_api2(e):
     """ A Wrapper for carbon.now.sh """
     await e.edit("`Processing..`")
     CARBON = 'https://carbon.now.sh/?bg=rgba(239%2C40%2C44%2C1)&t=one-light&wt=none&l=application%2Ftypescript&ds=true&dsyoff=20px&dsblur=68px&wc=true&wa=true&pv=56px&ph=56px&ln=false&fl=1&fm=Hack&fs=14px&lh=143%25&si=false&es=2x&wm=false&code={code}'
@@ -177,7 +167,6 @@ async def carbon_api(e):
         force_document=True,
         reply_to=e.message.reply_to_msg_id,
     )
-
     os.remove('/root/userbot/.bin/carbon.png')
     driver.quit()
     # Removing carbon.png after uploading
@@ -185,7 +174,7 @@ async def carbon_api(e):
     
 
 @register(outgoing=True, pattern="^.carbon3")
-async def carbon_api(e):
+async def carbon_api3(e):
     """ A Wrapper for carbon.now.sh """
     await e.edit("`Processing..`")
     CARBON = 'https://carbon.now.sh/?bg=rgba(74%2C144%2C226%2C1)&t=material&wt=none&l=auto&ds=false&dsyoff=20px&dsblur=68px&wc=true&wa=true&pv=56px&ph=56px&ln=false&fl=1&fm=Fira%20Code&fs=14px&lh=152%25&si=false&es=2x&wm=false&code={code}'
@@ -243,7 +232,6 @@ async def carbon_api(e):
         force_document=True,
         reply_to=e.message.reply_to_msg_id,
     )
-
     os.remove('/root/userbot/.bin/carbon.png')
     driver.quit()
     # Removing carbon.png after uploading
@@ -251,7 +239,7 @@ async def carbon_api(e):
     
     
 @register(outgoing=True, pattern="^.carbon4")
-async def carbon_api(e):
+async def carbon_api4(e):
     """ A Wrapper for carbon.now.sh """
     await e.edit("`Processing..`")
     CARBON = 'https://carbon.now.sh/?bg=rgba(29%2C40%2C104%2C1)&t=one-light&wt=none&l=application%2Ftypescript&ds=true&dsyoff=20px&dsblur=68px&wc=true&wa=true&pv=56px&ph=56px&ln=false&fl=1&fm=Hack&fs=14px&lh=143%25&si=false&es=2x&wm=false&code={code}'
@@ -309,7 +297,6 @@ async def carbon_api(e):
         force_document=True,
         reply_to=e.message.reply_to_msg_id,
     )
-
     os.remove('/root/userbot/.bin/carbon.png')
     driver.quit()
     # Removing carbon.png after uploading

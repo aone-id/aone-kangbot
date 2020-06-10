@@ -5,19 +5,18 @@
 # All Credits to https://t.me/azrim89 for timestamp.
 # All Credits to https://t.me/Devp73 for Offline stamps..
 #
-
 """ Userbot module which contains afk-related commands """
 
 from datetime import datetime
 import time
 from random import choice, randint
-from asyncio import sleep
+
 
 from telethon.events import StopPropagation
 from telethon.tl.functions.account import UpdateProfileRequest
 
 from userbot import (AFKREASON, COUNT_MSG, CMD_HELP, ISAFK, BOTLOG,
-                     BOTLOG_CHATID, USERS, PM_AUTO_BAN, bot, ALIVE_NAME, is_redis_alive)
+                     BOTLOG_CHATID, USERS, PM_AUTO_BAN, bot, is_redis_alive)
 from userbot.events import register
 
 # =================================================================
@@ -232,7 +231,7 @@ async def afk_on_pm(sender):
                 afk_since = f"`{int(seconds)}s`"
             if sender.sender_id not in USERS:
                 if AFKREASON:
-                    await mention.reply(f"**I've been AFK.** (Since {afk_since} ago.)\
+                    await sender.reply(f"**I've been AFK.** (Since {afk_since} ago.)\
                        \n**Reason:** `{AFKREASON}`")
                 else:
                     await sender.reply(f"**I've been AFK.** (Since {afk_since} ago.)")
@@ -241,7 +240,7 @@ async def afk_on_pm(sender):
             elif apprv and sender.sender_id in USERS:
                 if USERS[sender.sender_id] % randint(2, 4) == 0:
                     if AFKREASON:
-                        await mention.reply(f"**I'm still AFK.** (Since {afk_since} ago.)\
+                        await sender.reply(f"**I'm still AFK.** (Since {afk_since} ago.)\
                             \n**Reason:** `{AFKREASON}`")
                     else:
                         await sender.reply(f"**I'm still AFK.** (Since {afk_since} ago.)")

@@ -18,7 +18,10 @@ from userbot.events import register
 
 # ================= CONSTANT =================
 VERSION = str(BOT_VERSION)
-DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else uname().node
+if ALIVE_NAME is not None:
+    DEFAULTUSER = str(ALIVE_NAME)
+else:
+    DEFAULTUSER = "User"
 # ============================================
 
 
@@ -169,7 +172,10 @@ async def amireallyaliveuser(username):
 async def amireallyalivereset(ureset):
     """ For .resetalive command, reset the username in the .alive command. """
     global DEFAULTUSER
-    DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else uname().node
+    if ALIVE_NAME is not None:
+        DEFAULTUSER = str(ALIVE_NAME)
+    else:
+        DEFAULTUSER = "User"
     await ureset.edit("`" "Successfully reset user for alive!" "`")
 
 
