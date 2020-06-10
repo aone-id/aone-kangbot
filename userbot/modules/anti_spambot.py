@@ -15,10 +15,9 @@ from userbot import BOTLOG, BOTLOG_CHATID, CMD_HELP, ANTI_SPAMBOT, ANTI_SPAMBOT_
 
 
 @bot.on(ChatAction)
-async def ANTI_SPAMBOT(welcm):
+async def antispambot(welcm):
+    """Ban a recently joined user if it matches the spammer checking algorithm."""
     try:
-        ''' Ban a recently joined user if it
-           matches the spammer checking algorithm. '''
         if not ANTI_SPAMBOT:
             return
         if welcm.user_joined or welcm.user_added:

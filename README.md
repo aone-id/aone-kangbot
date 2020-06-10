@@ -1,7 +1,9 @@
 # Project Telegram Aone-Kangbot
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/22035f964c674c9e949ad4bf6009e4f0)](https://app.codacy.com/gh/aone-id/aone-kangbot?utm_source=github.com&utm_medium=referral&utm_content=aone-id/aone-kangbot&utm_campaign=Badge_Grade_Dashboard)
 [![](https://github.com/aone-id/aone-kangbot/workflows/BugChecker/badge.svg)](https://github.com/aone-id/aone-kangbot/actions?query=workflow%3ABugChecker)
-[![Build](https://github.com/aone-id/aone-kangbot/workflows/FailedChecker/badge.svg?branch=sql-extended)](https://github.com/aone-id/aone-kangbot/actions "Build") [![Codacy Badge](https://api.codacy.com/project/badge/Grade/e35faa6a680f4d66abdffddaad76e418)](https://app.codacy.com/manual/aone-id/aone-kangbot?utm_source=github.com&utm_medium=referral&utm_content=aone-id/aone-kangbot&utm_campaign=Badge_Grade_Dashboard) ![Last Commit](https://img.shields.io/github/last-commit/aone-id/aone-kangbot/sql-extended) ![Contributors](https://img.shields.io/github/contributors/aone-id/aone-kangbot?color=LightSlateGrey)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/22035f964c674c9e949ad4bf6009e4f0)](https://app.codacy.com/gh/aone-id/aone-kangbot?utm_source=github.com&utm_medium=referral&utm_content=aone-id/aone-kangbot&utm_campaign=Badge_Grade_Dashboard)
+[![Build](https://github.com/aone-id/aone-kangbot/workflows/FailedChecker/badge.svg?branch=sql-extended)](https://github.com/aone-id/aone-kangbot/actions "Build")
+![Last Commit](https://img.shields.io/github/last-commit/aone-id/aone-kangbot/sql-extended)
+![Contributors](https://img.shields.io/github/contributors/aone-id/aone-kangbot?color=LightSlateGrey)
 
 
 ![logo](https://github.com/aone-id/aone-kangbot/raw/sql-extended/aoneid.png)

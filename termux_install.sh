@@ -1,3 +1,5 @@
+#!/bin/bash
+#
 clear
 echo -E "                                ******,*,.          ...       "
 echo -E "                           /////*****,*... .  .               "
@@ -42,9 +44,9 @@ pip install -r requirements.txt
 
 mv sample_config.env config.env
 
-mkdir -p $PREFIX/var/lib/postgresql
-initdb $PREFIX/var/lib/postgresql
-pg_ctl -D $PREFIX/var/lib/postgresql start
+mkdir -p "$PREFIX"/var/lib/postgresql
+initdb "$PREFIX"/var/lib/postgresql
+pg_ctl -D "$PREFIX"/var/lib/postgresql start
 createdb botdb
 createuser botuser
 

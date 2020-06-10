@@ -10,16 +10,16 @@ from random import randint
 from asyncio import sleep
 from os import execl
 import sys
-import os
 import io
-import sys
-import json
 from userbot import BOTLOG, BOTLOG_CHATID, CMD_HELP, bot, GIT_REPO_NAME, ALIVE_NAME
 from userbot.events import register
 
 
 # ================= CONSTANT =================
-DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else uname().node
+if ALIVE_NAME is not None:
+    DEFAULTUSER = str(ALIVE_NAME)
+else:
+    DEFAULTUSER = "User"
 # ============================================
 
 
@@ -67,7 +67,7 @@ async def killdabot(event):
 
 
 @register(outgoing=True, pattern="^.restart$")
-async def killdabot(event):
+async def kill_abot(event):
     await event.edit("`*i would be back in a moment*`")
     if BOTLOG:
         await event.client.send_message(BOTLOG_CHATID, "#RESTART \n"

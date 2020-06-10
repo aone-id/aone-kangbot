@@ -1,19 +1,18 @@
-#This module was created by @spechide for Uniborg
-"""Log PMs
-this will now log chat msgs to your botlog chat id.
-if you don't want chat logs than use `.nolog` , for opposite use `.log`. Default is .log enabled.
-enjoy this now.
-Thanks to @heyworld for a small correction"""
+# This module was created by @spechide for Uniborg
+# Log PMs
+# this will now log chat msgs to your botlog chat id.
+# if you don't want chat logs than use `.nolog` , for opposite use `.log`. Default is .log enabled.
+# enjoy this now.
+# Thanks to @heyworld for a small correction
 
 import asyncio
-import os
 from telethon.tl.functions.photos import GetUserPhotosRequest
 from telethon.tl.functions.users import GetFullUserRequest
 from telethon.tl.types import MessageEntityMentionName
 from telethon.utils import get_input_location
 from telethon import events
 from telethon.tl import functions, types
-from userbot import NC_LOG_P_M_S, PM_LOGGR_BOT_API_ID, CMD_HELP, bot, TEMP_DOWNLOAD_DIRECTORY
+from userbot import NC_LOG_P_M_S, PM_LOGGR_BOT_API_ID, bot, CMD_HELP, TEMP_DOWNLOAD_DIRECTORY
 from userbot.events import register
 
 
@@ -53,7 +52,7 @@ async def approve_p_m(event):
 
                 
 @register(pattern="^.log(?: |$)(.*)")
-async def approve_p_m(event):
+async def approve_pm(event):
     if event.fwd_from:
         return
     reason = event.pattern_match.group(1)
