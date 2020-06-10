@@ -13,7 +13,7 @@ from shutil import which
 from os import remove
 from telethon import version
 
-from userbot import CMD_HELP, ALIVE_NAME, BOT_VERSION
+from userbot import bot, CMD_HELP, ALIVE_NAME, AONE_LOGO, BOT_VERSION
 from userbot.events import register
 
 # ================= CONSTANT =================
@@ -136,7 +136,8 @@ async def pipcheck(pip):
 @register(outgoing=True, pattern="^.alive$")
 async def amireallyalive(alive):
     """ For .alive command, check if the bot is running.  """
-    await alive.edit("`"
+    logo = AONE_LOGO
+    alive_text = ("`"
                      f"••••••••••••••••••••••••••••••• \n"
                      "Aone-Kangbot is running, Enjoy! \n\n"
                      f"=============================== \n"
@@ -148,6 +149,7 @@ async def amireallyalive(alive):
                      f"••••••••••••••••••••••••••••••• \n"
                      " \n\n"
                      "`")
+    await bot.send_file(alive.chat_id, logo, caption=alive_text)
 
 
 @register(outgoing=True, pattern="^.aliveu")
