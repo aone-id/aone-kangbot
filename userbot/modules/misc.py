@@ -92,13 +92,13 @@ async def bot_community(community):
 async def bot_support(wannahelp):
     """ For .support command, just returns the group link. """
     await wannahelp.edit(
-        "Pm This Bot to Get Support: @Aone_Helper_Bot")
+        "Join this Group to Get Support: [Aone-ID Support](https://t.me/aoneid_support)") 
 
 
 
 @register(outgoing=True, pattern="^.creator$")
 async def creator(e):
-    await e.edit("aone-kangbot by [aone-id](https://aone-id.github.io/)\nBased on [OpenUserbot](https://t.me/Three_Cube_TeKnoways)")
+    await e.edit("aone-kangbot by [aone-id](https://aone-id.github.io/)\nSupport Group [Aone-ID Support](https://t.me/aoneid_support)\nBased on [OpenUserbot](https://t.me/Three_Cube_TeKnoways)")
 
 
 
