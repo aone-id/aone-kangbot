@@ -38,9 +38,7 @@ For further guide you can head to [Groups and Support](https://github.com/aone-i
 
 
 ## Groups and Support
-Join [Aone ID Group](https://t.me/aone-id_support) for discussion, bug reporting, and help.
-
-Join [Aone ID Helper Bot](https://t.me/Aone_Helper_Bot) our helper bot.
+Join [Aone ID Group](https://t.me/aoneid_support) for discussion, bug reporting, and help.
 
 
 ## Credits
