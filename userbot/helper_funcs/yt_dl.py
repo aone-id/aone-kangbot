@@ -34,7 +34,8 @@ merger = re.compile(r'\[ffmpeg\] Merging formats into "(.+)"')
 
 class YTdlLogger(object):
     """Logger used for YoutubeDL which logs to UserBot logger."""
-    def debug(self, msg: str) -> None:
+    @staticmethod
+    def debug(msg: str) -> None:
         """Logs debug messages with youtube-dl tag to UserBot logger."""
         LOGGER.debug("youtube-dl: " + msg)
         f = None
@@ -48,15 +49,18 @@ class YTdlLogger(object):
             if f:
                 downloads.update({f.split('.')[0]: f})
 
-    def warning(self, msg: str) -> None:
+    @staticmethod
+    def warning(msg: str) -> None:
         """Logs warning messages with youtube-dl tag to UserBot logger."""
         LOGGER.warning("youtube-dl: " + msg)
 
-    def error(self, msg: str) -> None:
+    @staticmethod
+    def error(msg: str) -> None:
         """Logs error messages with youtube-dl tag to UserBot logger."""
         LOGGER.error("youtube-dl: " + msg)
 
-    def critical(self, msg: str) -> None:
+    @staticmethod
+    def critical(msg: str) -> None:
         """Logs critical messages with youtube-dl tag to UserBot logger."""
         LOGGER.critical("youtube-dl: " + msg)
 
