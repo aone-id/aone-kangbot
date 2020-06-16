@@ -127,10 +127,7 @@ async def download_api(dl):
     if not re.findall(r'\bhttps?://download.*pixelexperience.*\.org\S+', URL):
         await dl.edit("`Invalid information...`")
         return
-    if URL.endswith('/'):
-        file_name = URL.split("/")[-2]
-    else:
-        file_name = URL.split("/")[-1]
+    file_name = URL.split("/")[-2] if URL.endswith('/') else URL.split("/")[-1]
     build_date = datetime.strptime(file_name.split("-")[2], '%Y%m%d'
                                    ).strftime('%Y/%m/%d')  # Full ROM
     android_version = file_name.split("-")[1]
