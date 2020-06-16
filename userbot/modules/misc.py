@@ -6,6 +6,7 @@
 # You can find misc modules, which dont fit in anything xD
 """ Userbot module for other small commands. """
 
+
 from random import randint
 from asyncio import sleep
 from os import execl
@@ -16,10 +17,7 @@ from userbot.events import register
 
 
 # ================= CONSTANT =================
-if ALIVE_NAME is not None:
-    DEFAULTUSER = str(ALIVE_NAME)
-else:
-    DEFAULTUSER = "User"
+DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME is not None else "User"
 # ============================================
 
 
@@ -124,7 +122,7 @@ async def repeat(rep):
 
     replyText = toBeRepeated + "\n"
 
-    for i in range(0, replyCount - 1):
+    for _ in range(replyCount - 1):
         replyText += toBeRepeated + "\n"
 
     await rep.edit(replyText)

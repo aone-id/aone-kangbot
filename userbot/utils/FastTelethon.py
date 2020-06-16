@@ -339,6 +339,5 @@ async def download_file(self: TelegramClient,
 async def upload_file(self: TelegramClient,
                       file: BinaryIO,
                       progress_callback: callable = None) -> TypeInputFile:
-    res = (await _internal_transfer_to_telegram(self, file,
+    return (await _internal_transfer_to_telegram(self, file,
                                                 progress_callback))[0]
-    return res

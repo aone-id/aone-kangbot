@@ -1,5 +1,6 @@
 """ Userbot module for other small commands. """
 
+
 from random import randint
 from asyncio import sleep
 from os import execl
@@ -12,10 +13,7 @@ from userbot.events import register
 
 
 # ================= CONSTANT =================
-if ALIVE_NAME is not None:
-    DEFAULTUSER = str(ALIVE_NAME)
-else:
-    DEFAULTUSER = "User"
+DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME is not None else "User"
 # ============================================
 
 @register(outgoing=True, pattern="^.useitoub$")

@@ -5,6 +5,7 @@
 #
 """ Userbot module for getting information about the server. """
 
+
 from asyncio import create_subprocess_exec as asyncrunapp
 from asyncio.subprocess import PIPE as asyncPIPE
 from os import remove
@@ -17,17 +18,14 @@ from userbot import CMD_HELP, is_mongo_alive, is_redis_alive, ALIVE_NAME
 from userbot.events import register
 
 # ================= CONSTANT =================
-if ALIVE_NAME is not None:
-    DEFAULTUSER = str(ALIVE_NAME)
-else:
-    DEFAULTUSER = "User"
+DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME is not None else "User"
 # ============================================
 
 
 
 @register(outgoing=True, pattern="^.dbs$")
 async def amireallydbs(dbs):
-    if not is_mongo_alive() and not is_redis_alive():
+    if not (is_mongo_alive() or is_redis_alive()):
         db = "Both Mongo and Redis Database seems to be failing!"
     elif not is_mongo_alive():
         db = "Mongo DB seems to be failing!"

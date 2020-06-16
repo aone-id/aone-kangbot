@@ -252,9 +252,12 @@ class PluginManager:
             sys.modules[ppath] = module
 
             for n, cb in vars(module).items():
-                if inspect.iscoroutinefunction(cb) and not n.startswith('_'):
-                    if events._get_handlers(cb):
-                        callbacks.append(Callback(n, cb))
+                if (
+                    inspect.iscoroutinefunction(cb)
+                    and not n.startswith('_')
+                    and events._get_handlers(cb)
+                ):
+                    callbacks.append(Callback(n, cb))
 
             self.active_plugins.append(Plugin(name, callbacks, ppath, module))
             LOGGER.info("Successfully Imported %s", path if content else name)

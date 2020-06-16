@@ -127,8 +127,7 @@ async def substitute(fr: str,
         newLine, i = re.subn(fr, to, lines[line - 1], count=count, flags=flags)
         if i > 0:
             lines[line - 1] = newLine
-            newStr = '\n'.join(lines)
-            return newStr
+            return '\n'.join(lines)
     else:
         s, i = re.subn(fr, to, original, count=count, flags=flags)
         if i > 0:
@@ -158,8 +157,7 @@ async def sub_matches(matches: list, original: str) -> Union[str, None]:
         try:
             count, flags = await resolve_flags(fl)
         except UnknownFlagError as f:
-            exc = f"`Unknown flag:` `{f}`"
-            return exc
+            return f"`Unknown flag:` `{f}`"
 
         newStr = await substitute(fr,
                                   to,

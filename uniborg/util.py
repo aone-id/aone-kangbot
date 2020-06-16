@@ -28,16 +28,16 @@ def admin_cmd(pattern=None, allow_sudo=False, **args):
             args["pattern"] = re.compile(pattern)
         else:
             args["pattern"] = re.compile(Config.COMMAND_HAND_LER + pattern)
-            
+
         args["func"] = lambda e: e.via_bot_id is None
-        
+
         args["outgoing"] = True
     # should this command be available for other users?
     if allow_sudo:
         args["from_users"] = list(Config.SUDO_USERS)
         # Mutually exclusive with outgoing (can only set one of either).
         args["incoming"] = True
-        
+
     # error handling condition check
     elif "incoming" in args and not args["incoming"]:
         args["outgoing"] = True
@@ -45,7 +45,7 @@ def admin_cmd(pattern=None, allow_sudo=False, **args):
     # add blacklist chats, UB should not respond in these chats
     args["blacklist_chats"] = True
     black_list_chats = list(Config.UB_BLACK_LIST_CHAT)
-    if len(black_list_chats) > 0:
+    if black_list_chats:
         args["chats"] = black_list_chats
 
     # check if the plugin should allow edited updates

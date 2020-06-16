@@ -105,8 +105,7 @@ async def download_from_url(url: str, file_name: str) -> str:
     end = datetime.now()
     duration = (end - start).seconds
     os.rename(downloader.file_name, file_name)
-    status = f"Downloaded `{file_name}` in {duration} seconds."
-    return status
+    return f"Downloaded `{file_name}` in {duration} seconds."
 
 
 async def download_from_tg(target_file) -> (str, BytesIO):
@@ -208,16 +207,15 @@ async def gdrive_upload(filename: str, filebuf: BytesIO = None) -> str:
     })
     if not filebuf:
         os.remove(filename)
-    reply = f"[{name}]({file['alternateLink']})\n" \
+    return f"[{name}]({file['alternateLink']})\n" \
         f"__Direct link:__ [Here]({file['downloadUrl']})"
-    return reply
 
 
 @register(pattern=r"^.mirror(?: |$)([\s\S]*)", outgoing=True)
 async def gdrive_mirror(request):
     """ Download a file and upload to Google Drive """
     message = request.pattern_match.group(1)
-    if not request.reply_to_msg_id and not message:
+    if not (request.reply_to_msg_id or message):
         await request.edit("`Usage: .mirror <url> <url>`")
         return
     reply = ''
@@ -278,10 +276,11 @@ async def download(target_file):
         # https://stackoverflow.com/a/761825/4723940
         file_name = file_name.strip()
         head, tail = os.path.split(file_name)
-        if head:
-            if not os.path.isdir(os.path.join(TEMP_DOWNLOAD_DIRECTORY, head)):
-                os.makedirs(os.path.join(TEMP_DOWNLOAD_DIRECTORY, head))
-                file_name = os.path.join(head, tail)
+        if head and not os.path.isdir(
+            os.path.join(TEMP_DOWNLOAD_DIRECTORY, head)
+        ):
+            os.makedirs(os.path.join(TEMP_DOWNLOAD_DIRECTORY, head))
+            file_name = os.path.join(head, tail)
         downloaded_file_name = TEMP_DOWNLOAD_DIRECTORY + "" + file_name
         downloader = SmartDL(url, downloaded_file_name, progress_bar=False)
         downloader.start(blocking=False)
@@ -409,7 +408,7 @@ async def uploadir(udir_event):
                             progress(d, t, udir_event, c_time, "Uploading...",
                                      single_file)))
                 os.remove(single_file)
-                uploaded = uploaded + 1
+                uploaded += 1
         await udir_event.edit(
             "Uploaded {} files successfully !!".format(uploaded))
     else:
@@ -500,12 +499,12 @@ async def uploadas(uas_event):
     supports_streaming = False
     round_message = False
     spam_big_messages = False
-    if type_of_upload == "stream":
-        supports_streaming = True
-    if type_of_upload == "vn":
-        round_message = True
     if type_of_upload == "all":
         spam_big_messages = True
+    elif type_of_upload == "stream":
+        supports_streaming = True
+    elif type_of_upload == "vn":
+        round_message = True
     input_str = uas_event.pattern_match.group(2)
     thumb = None
     file_name = None

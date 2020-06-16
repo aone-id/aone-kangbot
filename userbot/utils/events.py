@@ -86,7 +86,7 @@ class NewMessage(events.NewMessage):
                 is_admin = False
                 creator = hasattr(event.chat, 'creator')
                 admin_rights = hasattr(event.chat, 'admin_rights')
-                if not creator and not admin_rights:
+                if not (creator or admin_rights):
                     event.chat = event._client.loop.create_task(
                         event.get_chat())
 
@@ -109,14 +109,13 @@ class NewMessage(events.NewMessage):
                     is_creator = event.chat.creator
                     is_admin = event.chat.admin_rights
 
-                if not is_creator:
-                    if not is_admin:
-                        if self.outgoing and event.message.out:
-                            event._client.loop.create_task(event.answer(text))
-                        elif self.incoming and not event.message.out:
-                            event._client.loop.create_task(
-                                event.answer(text, reply=True))
-                        return
+                if not is_creator and not is_admin:
+                    if self.outgoing and event.message.out:
+                        event._client.loop.create_task(event.answer(text))
+                    elif self.incoming and not event.message.out:
+                        event._client.loop.create_task(
+                            event.answer(text, reply=True))
+                    return
         return event
 
 

@@ -70,7 +70,6 @@ async def isRestart(client: UserBotClient) -> None:
         except (ValueError, errors.MessageAuthorRequiredError,
                 errors.MessageNotModifiedError, errors.MessageIdInvalidError):
             LOGGER.debug(f"Failed to edit message ({message}) in {entity}.")
-            pass
 
     if updated:
         text = "`Successfully updated and restarted the userbot!`"

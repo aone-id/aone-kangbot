@@ -16,9 +16,7 @@ from userbot import CMD_HELP, LOGS, GENIUS
 
 @register(outgoing=True, pattern="^.lyrics(?: |$)(.*)")
 async def lyrics(lyric):
-    if r"-" in lyric.text:
-        pass
-    else:
+    if r"-" not in lyric.text:
         await lyric.edit("`Error: please use '-' as divider for <artist> and <song>`\n"
                          "eg: `Nicki Minaj - Super Bass`")
         return

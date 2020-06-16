@@ -49,15 +49,22 @@ async def answer(self,
     else:
         parser = markdown
 
-    is_media = any([k for k in file_kwargs if kwargs.get(k, False)])
+    is_media = any(k for k in file_kwargs if kwargs.get(k, False))
     if len(args) == 1 and isinstance(args[0], str) and not is_media:
         is_reply = reply or kwargs.get('reply_to', False)
         text = args[0]
         msg, msg_entities = parser.parse(text)
         if len(msg) <= MAXLIM:
-            if (not (message and message.out) or is_reply or self.fwd_from or
-                (self.media
-                 and not isinstance(self.media, types.MessageMediaWebPage))):
+            if (
+                not message
+                or not message.out
+                or is_reply
+                or self.fwd_from
+                or (
+                    self.media
+                    and not isinstance(self.media, types.MessageMediaWebPage)
+                )
+            ):
                 kwargs.setdefault('reply_to', reply_to)
                 try:
                     kwargs.setdefault('silent', True)
@@ -91,8 +98,12 @@ async def answer(self,
                     except Exception as e:
                         raise e
         else:
-            if (message and message.out
-                    and not (message.fwd_from or message.media)):
+            if (
+                message
+                and message.out
+                and not message.fwd_from
+                and not message.media
+            ):
                 try:
                     await self.edit("`Output exceeded the limit.`")
                 except errors.rpcerrorlist.MessageIdInvalidError:
@@ -250,9 +261,7 @@ async def _self_destructor(
 ) -> Union[custom.Message, Sequence[custom.Message]]:
     await asyncio.sleep(timeout)
     if isinstance(event, list):
-        deleted = []
-        for e in event:
-            deleted.append(await e.delete())
+        deleted = [await e.delete() for e in event]
     else:
         deleted = await event.delete()
     return deleted

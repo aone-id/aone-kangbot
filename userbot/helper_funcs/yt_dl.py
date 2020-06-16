@@ -99,7 +99,7 @@ class ProgressHook():
             spdstr = d.get('_speed_str', None)
             etastr = d.get('_eta_str', None)
 
-            if not prcnt or not ttlbyt or not spdstr or not etastr:
+            if not (prcnt and ttlbyt and spdstr and etastr):
                 return
 
             finalStr = ("Downloading {}: {} of {} at {} ETA: {}".format(
@@ -119,7 +119,7 @@ class ProgressHook():
             elpstr = d.get('_elapsed_str', None)
             downloads.update({filen.split('.')[0]: filen})
 
-            if not ttlbyt or not elpstr:
+            if not (ttlbyt and elpstr):
                 return
 
             finalStr = f"Downloaded {filen}: 100% of {ttlbyt} in {elpstr}"
@@ -158,10 +158,9 @@ async def list_formats(info_dict: dict) -> str:
         table[-1][-1] += (' ' if table[-1][-1] else '') + '(best)'
 
     header_line = ['format code', 'extension', 'resolution']
-    fmtStr = (
+    return (
         '`Available formats for %s:`\n`%s`' %
         (info_dict['title'], youtube_dl.render_table(header_line, table)))
-    return fmtStr
 
 
 async def extract_info(loop,
