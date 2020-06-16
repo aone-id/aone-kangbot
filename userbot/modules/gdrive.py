@@ -1,13 +1,18 @@
-# Copyright (C) 2019 The Raphielscape Company LLC.
+# Copyright (C) 2020 Adek Maulana
 #
-# Licensed under the Raphielscape Public License, Version 1.d (the "License");
-# you may not use this file except in compliance with the License.
+# SPDX-License-Identifier: GPL-3.0-or-later
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
 #
-# Many improve from adekmaulana
-
-"""
-    Google Drive manager for Userbot
-"""
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import io
 import os
@@ -24,7 +29,7 @@ import logging
 import userbot.modules.sql_helper.google_drive_sql as helper
 
 from bs4 import BeautifulSoup
-from os.path import isfile, isdir, join
+from os.path import isfile, isdir, join, getctime
 from mimetypes import guess_type
 
 from telethon import events
@@ -252,6 +257,12 @@ async def download(gdrive, service, uri=None):
                                        "[FILE - DOWNLOAD]",
                                        is_cancelled=is_cancelled)))
         except CancelProcess:
+            names = []
+            for name in os.listdir(TEMP_DOWNLOAD_DIRECTORY):
+                names.append(join(TEMP_DOWNLOAD_DIRECTORY, name))
+            """ asumming newest files are the cancelled one """
+            newest = max(names, key=getctime)
+            os.remove(newest)
             reply += (
                 "`[FILE - CANCELLED]`\n\n"
                 "`Status` : **OK** - received signal cancelled."
@@ -425,9 +436,9 @@ async def download_gdrive(gdrive, service, uri):
                     speed = round(downloaded / diff, 2)
                     eta = round((file_size - downloaded) / speed)
                     prog_str = "`Downloading` | [{0}{1}] `{2}%`".format(
-                        "".join(["■" for i in range(
+                        "".join(["●" for i in range(
                                 math.floor(percentage / 10))]),
-                        "".join(["▨"for i in range(
+                        "".join(["○"for i in range(
                                 10 - math.floor(percentage / 10))]),
                         round(percentage, 2))
                     current_message = (
@@ -471,9 +482,9 @@ async def download_gdrive(gdrive, service, uri):
                     speed = round(downloaded / diff, 2)
                     eta = round((file_size - downloaded) / speed)
                     prog_str = "`Downloading` | [{0}{1}] `{2}%`".format(
-                        "".join(["■" for i in range(
+                        "".join(["●" for i in range(
                                 math.floor(percentage / 10))]),
-                        "".join(["▨" for i in range(
+                        "".join(["○" for i in range(
                                 10 - math.floor(percentage / 10))]),
                         round(percentage, 2))
                     current_message = (
@@ -631,9 +642,9 @@ async def upload(gdrive, service, file_path, file_name, mimeType):
             speed = round(uploaded / diff, 2)
             eta = round((file_size - uploaded) / speed)
             prog_str = "`Uploading` | [{0}{1}] `{2}%`".format(
-                "".join(["■" for i in range(
+                "".join(["●" for i in range(
                         math.floor(percentage / 10))]),
-                "".join(["▨" for i in range(
+                "".join(["○" for i in range(
                         10 - math.floor(percentage / 10))]),
                 round(percentage, 2))
             current_message = (
@@ -1248,9 +1259,9 @@ async def check_progress_for_dl(gdrive, gid, previous):
                 percentage = int(file.progress)
                 downloaded = percentage * int(file.total_length) / 100
                 prog_str = "`Downloading` | [{0}{1}] `{2}`".format(
-                    "".join(["■" for i in range(
+                    "".join(["●" for i in range(
                             math.floor(percentage / 10))]),
-                    "".join(["▨" for i in range(
+                    "".join(["○" for i in range(
                             10 - math.floor(percentage / 10))]),
                     file.progress_string())
                 msg = (
@@ -1291,34 +1302,35 @@ async def check_progress_for_dl(gdrive, gid, previous):
 
 CMD_HELP.update({
     "gdrive":
-    ".gdauth"
+    ">`.gdauth`"
     "\nUsage: generate token to enable all cmd google drive service."
     "\nThis only need to run once in life time."
-    "\n\n.gdreset"
+    "\n\n>`.gdreset`"
     "\nUsage: reset your token if something bad happened or change drive acc."
-    "\n\n.gd"
+    "\n\n>`.gd`"
     "\nUsage: Upload file from local or uri/url/drivelink into google drive."
     "\nfor drivelink it's upload only if you want to."
-    "\n\n.gdabort"
+    "\n\n>`.gdabort`"
     "\nUsage: Abort process uploading or downloading."
-    "\n\n.gdlist"
+    "\n\n>`.gdlist`"
     "\nUsage: Get list of folders and files with default size 50."
     "\nUse flags `-l range[1-1000]` for limit output."
     "\nUse flags `-p parents-folder_id` for lists given folder in gdrive."
-    "\n\n.gdf mkdir"
+    "\n\n>`.gdf mkdir`"
     "\nUsage: Create gdrive folder."
-    "\n\n.gdf chck"
+    "\n\n>`.gdf chck`"
     "\nUsage: Check file/folder in gdrive."
-    "\n\n.gdf rm"
+    "\n\n>`.gdf rm`"
     "\nUsage: Delete files/folders in gdrive."
     "\nCan't be undone, this method skipping file trash, so be caution..."
-    "\n\n.gdfset put"
+    "\n\n>`.gdfset put`"
     "\nUsage: Change upload directory in gdrive."
-    "\n\n.gdfset rm"
-    "\nUsage: remove set parentId from cmd\n.gdfset put "
+    "\n\n>`.gdfset rm`"
+    "\nUsage: remove set parentId from cmd\n>`.gdfset put` "
     "into **G_DRIVE_FOLDER_ID** and if empty upload will go to root."
     "\n\nNOTE:"
-    "\nfor .gdlist you can combine -l and -p flags with or without name "
+    "\nfor >`.gdlist` you can combine -l and -p flags with or without name "
     "at the same time, it must be `-l` flags first before use `-p` flags.\n"
     "And by default it lists from latest 'modifiedTime' and then folders."
 })
+
