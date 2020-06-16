@@ -4,7 +4,6 @@
 # Credits @adekmaulana
 
 import os
-import asyncio
 from telethon.errors.rpcerrorlist import YouBlockedUserError
 
 from userbot.events import register
