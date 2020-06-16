@@ -139,7 +139,7 @@ class ParallelTransferrer:
 
     async def _init_download(self, connections: int, file: TypeLocation,
                              part_count: int, part_size: int) -> None:
-        minimum, remainder = divmod(part_count, connections)
+        minimum, _ = divmod(part_count, connections)
 
         def get_part_count() -> int:
             nonlocal remainder
