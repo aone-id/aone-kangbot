@@ -109,7 +109,7 @@ class NewMessage(events.NewMessage):
                     is_creator = event.chat.creator
                     is_admin = event.chat.admin_rights
 
-                if not is_creator and not is_admin:
+                if not (is_creator or is_admin):
                     if self.outgoing and event.message.out:
                         event._client.loop.create_task(event.answer(text))
                     elif self.incoming and not event.message.out:
