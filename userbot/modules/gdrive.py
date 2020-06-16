@@ -1,15 +1,21 @@
-# Copyright (C) 2019 The Raphielscape Company LLC.
+# Copyright (C) 2020 Adek Maulana
 #
-# Licensed under the Raphielscape Public License, Version 1.d (the "License");
-# you may not use this file except in compliance with the License.
+# SPDX-License-Identifier: GPL-3.0-or-later
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
 #
-# Many improve from adekmaulana
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-"""
-    Google Drive manager for Userbot
-"""
 
-
+""" - ProjectBish Google Drive managers - """
 import io
 import os
 import pickle
@@ -25,7 +31,7 @@ import logging
 import userbot.modules.sql_helper.google_drive_sql as helper
 
 from bs4 import BeautifulSoup
-from os.path import isfile, isdir, join
+from os.path import isfile, isdir, join, getctime
 from mimetypes import guess_type
 
 from telethon import events
@@ -76,9 +82,17 @@ if __ is not None:
                     G_DRIVE_FOLDER_ID = __.split(
                                       "folderview?id=")[1]
                 except IndexError:
-                    _1 = True if any(map(str.isdigit, __)) else False
-                    _2 = True if "-" in __ or "_" in __ else False
-                    if True not in [_1 or _2]:
+                    if any(map(str.isdigit, __)):
+                        _1 = True
+                    else:
+                        _1 = False
+                    if "-" in __ or "_" in __:
+                        _2 = True
+                    else:
+                        _2 = False
+                    if True in [_1 or _2]:
+                        pass
+                    else:
                         LOGS.info(
                             "G_DRIVE_FOLDER_ID "
                             "not a valid ID/URL...")
@@ -164,7 +178,7 @@ async def create_app(gdrive):
         """ - Repack credential objects from strings - """
         creds = pickle.loads(
               base64.b64decode(creds.encode()))
-    if not (creds and creds.valid):
+    if not creds or not creds.valid:
         if creds and creds.expired and creds.refresh_token:
             await gdrive.edit("`Refreshing credentials...`")
             """ - Refresh credentials - """
@@ -174,7 +188,8 @@ async def create_app(gdrive):
         else:
             await gdrive.edit("`Credentials is empty, please generate it...`")
             return False
-    return build('drive', 'v3', credentials=creds, cache_discovery=False)
+    service = build('drive', 'v3', credentials=creds, cache_discovery=False)
+    return service
 
 
 @register(pattern="^.gdreset(?: |$)", outgoing=True)
@@ -244,6 +259,12 @@ async def download(gdrive, service, uri=None):
                                        "[FILE - DOWNLOAD]",
                                        is_cancelled=is_cancelled)))
         except CancelProcess:
+            names = []
+            for name in os.listdir(TEMP_DOWNLOAD_DIRECTORY):
+                names.append(join(TEMP_DOWNLOAD_DIRECTORY, name))
+            """ asumming newest files are the cancelled one """
+            newest = max(names, key=getctime)
+            os.remove(newest)
             reply += (
                 "`[FILE - CANCELLED]`\n\n"
                 "`Status` : **OK** - received signal cancelled."
@@ -401,14 +422,14 @@ async def download_gdrive(gdrive, service, uri):
                 first = True
                 is_cancelled = False
                 for chunk in download.iter_content(CHUNK_SIZE):
-                    if is_cancelled:
+                    if is_cancelled is True:
                         raise CancelProcess
 
                     if not chunk:
                         break
 
                     diff = time.time() - current_time
-                    if first:
+                    if first is True:
                         downloaded = len(chunk)
                         first = False
                     else:
@@ -417,9 +438,9 @@ async def download_gdrive(gdrive, service, uri):
                     speed = round(downloaded / diff, 2)
                     eta = round((file_size - downloaded) / speed)
                     prog_str = "`Downloading` | [{0}{1}] `{2}%`".format(
-                        "".join(["■" for i in range(
+                        "".join(["●" for i in range(
                                 math.floor(percentage / 10))]),
-                        "".join(["▨"for i in range(
+                        "".join(["○"for i in range(
                                 10 - math.floor(percentage / 10))]),
                         round(percentage, 2))
                     current_message = (
@@ -450,8 +471,8 @@ async def download_gdrive(gdrive, service, uri):
             is_cancelled = False
             current_time = time.time()
             display_message = None
-            while not complete:
-                if is_cancelled:
+            while complete is False:
+                if is_cancelled is True:
                     raise CancelProcess
 
                 status, complete = downloader.next_chunk()
@@ -463,9 +484,9 @@ async def download_gdrive(gdrive, service, uri):
                     speed = round(downloaded / diff, 2)
                     eta = round((file_size - downloaded) / speed)
                     prog_str = "`Downloading` | [{0}{1}] `{2}%`".format(
-                        "".join(["■" for i in range(
+                        "".join(["●" for i in range(
                                 math.floor(percentage / 10))]),
-                        "".join(["▨" for i in range(
+                        "".join(["○" for i in range(
                                 10 - math.floor(percentage / 10))]),
                         round(percentage, 2))
                     current_message = (
@@ -547,9 +568,10 @@ async def change_permission(service, Id):
 
 
 async def get_information(service, Id):
-    return service.files().get(fileId=Id, fields="name, id, size, mimeType, "
+    r = service.files().get(fileId=Id, fields="name, id, size, mimeType, "
                             "webViewLink, webContentLink,"
                             "description").execute()
+    return r
 
 
 async def create_dir(service, folder_name):
@@ -558,7 +580,8 @@ async def create_dir(service, folder_name):
         'mimeType': 'application/vnd.google-apps.folder',
     }
     try:
-        pass
+        if parent_Id is not None:
+            pass
     except NameError:
         """ - Fallback to G_DRIVE_FOLDER_ID else root dir - """
         if G_DRIVE_FOLDER_ID is not None:
@@ -586,7 +609,8 @@ async def upload(gdrive, service, file_path, file_name, mimeType):
         "mimeType": mimeType,
     }
     try:
-        pass
+        if parent_Id is not None:
+            pass
     except NameError:
         """ - Fallback to G_DRIVE_FOLDER_ID else root dir - """
         if G_DRIVE_FOLDER_ID is not None:
@@ -608,7 +632,7 @@ async def upload(gdrive, service, file_path, file_name, mimeType):
     display_message = None
     is_cancelled = False
     while response is None:
-        if is_cancelled:
+        if is_cancelled is True:
             raise CancelProcess
 
         status, response = file.next_chunk()
@@ -620,9 +644,9 @@ async def upload(gdrive, service, file_path, file_name, mimeType):
             speed = round(uploaded / diff, 2)
             eta = round((file_size - uploaded) / speed)
             prog_str = "`Uploading` | [{0}{1}] `{2}%`".format(
-                "".join(["■" for i in range(
+                "".join(["●" for i in range(
                         math.floor(percentage / 10))]),
-                "".join(["▨" for i in range(
+                "".join(["○" for i in range(
                         10 - math.floor(percentage / 10))]),
                 round(percentage, 2))
             current_message = (
@@ -658,7 +682,7 @@ async def task_directory(gdrive, service, folder_path):
         return parent_Id
     root_parent_Id = None
     for f in lists:
-        if is_cancelled:
+        if is_cancelled is True:
             raise CancelProcess
 
         current_f_name = join(folder_path, f)
@@ -678,7 +702,8 @@ async def task_directory(gdrive, service, folder_path):
 async def reset_parentId():
     global parent_Id
     try:
-        pass
+        if parent_Id is not None:
+            pass
     except NameError:
         if G_DRIVE_FOLDER_ID is not None:
             parent_Id = G_DRIVE_FOLDER_ID
@@ -816,7 +841,8 @@ async def google_drive_managers(gdrive):
             'mimeType': 'application/vnd.google-apps.folder',
         }
         try:
-            pass
+            if parent_Id is not None:
+                pass
         except NameError:
             """ - Fallback to G_DRIVE_FOLDER_ID else to root dir - """
             if G_DRIVE_FOLDER_ID is not None:
@@ -967,7 +993,7 @@ async def google_drive(gdrive):
     value = gdrive.pattern_match.group(1)
     file_path = None
     uri = None
-    if not (value or gdrive.reply_to_msg_id):
+    if not value and not gdrive.reply_to_msg_id:
         return
     elif value and gdrive.reply_to_msg_id:
         return await gdrive.edit(
@@ -1047,8 +1073,14 @@ async def google_drive(gdrive):
             uri = value.split()
         else:
             for fileId in value.split():
-                one = True if any(map(str.isdigit, fileId)) else False
-                two = True if "-" in fileId or "_" in fileId else False
+                if any(map(str.isdigit, fileId)):
+                    one = True
+                else:
+                    one = False
+                if "-" in fileId or "_" in fileId:
+                    two = True
+                else:
+                    two = False
                 if True in [one or two]:
                     try:
                         reply += await download_gdrive(gdrive, service, fileId)
@@ -1070,7 +1102,7 @@ async def google_drive(gdrive):
                 return await gdrive.delete()
             else:
                 return
-        if not (uri or gdrive.reply_to_msg_id):
+        if not uri and not gdrive.reply_to_msg_id:
             return await gdrive.edit(
                 "`[VALUE - ERROR]`\n\n"
                 "`Status` : **BAD**\n"
@@ -1159,8 +1191,14 @@ async def set_upload_folder(gdrive):
         ext_id = re.findall(r'\bhttps?://drive\.google\.com\S+', inp)[0]
     except IndexError:
         """ - if given value isn't folderURL assume it's an Id - """
-        c1 = True if any(map(str.isdigit, inp)) else False
-        c2 = True if "-" in inp or "_" in inp else False
+        if any(map(str.isdigit, inp)):
+            c1 = True
+        else:
+            c1 = False
+        if "-" in inp or "_" in inp:
+            c2 = True
+        else:
+            c2 = False
         if True in [c1 or c2]:
             parent_Id = inp
             return await gdrive.edit(
@@ -1209,7 +1247,7 @@ async def check_progress_for_dl(gdrive, gid, previous):
     global filenames
     is_cancelled = False
     while not complete:
-        if is_cancelled:
+        if is_cancelled is True:
             raise CancelProcess
 
         file = aria2.get_download(gid)
@@ -1219,13 +1257,13 @@ async def check_progress_for_dl(gdrive, gid, previous):
         except IndexError:
             pass
         try:
-            if not (complete or file.error_message):
+            if not complete and not file.error_message:
                 percentage = int(file.progress)
                 downloaded = percentage * int(file.total_length) / 100
                 prog_str = "`Downloading` | [{0}{1}] `{2}`".format(
-                    "".join(["■" for i in range(
+                    "".join(["●" for i in range(
                             math.floor(percentage / 10))]),
-                    "".join(["▨" for i in range(
+                    "".join(["○" for i in range(
                             10 - math.floor(percentage / 10))]),
                     file.progress_string())
                 msg = (
@@ -1266,34 +1304,35 @@ async def check_progress_for_dl(gdrive, gid, previous):
 
 CMD_HELP.update({
     "gdrive":
-    ".gdauth"
+    ">`.gdauth`"
     "\nUsage: generate token to enable all cmd google drive service."
     "\nThis only need to run once in life time."
-    "\n\n.gdreset"
+    "\n\n>`.gdreset`"
     "\nUsage: reset your token if something bad happened or change drive acc."
-    "\n\n.gd"
+    "\n\n>`.gd`"
     "\nUsage: Upload file from local or uri/url/drivelink into google drive."
     "\nfor drivelink it's upload only if you want to."
-    "\n\n.gdabort"
+    "\n\n>`.gdabort`"
     "\nUsage: Abort process uploading or downloading."
-    "\n\n.gdlist"
+    "\n\n>`.gdlist`"
     "\nUsage: Get list of folders and files with default size 50."
     "\nUse flags `-l range[1-1000]` for limit output."
     "\nUse flags `-p parents-folder_id` for lists given folder in gdrive."
-    "\n\n.gdf mkdir"
+    "\n\n>`.gdf mkdir`"
     "\nUsage: Create gdrive folder."
-    "\n\n.gdf chck"
+    "\n\n>`.gdf chck`"
     "\nUsage: Check file/folder in gdrive."
-    "\n\n.gdf rm"
+    "\n\n>`.gdf rm`"
     "\nUsage: Delete files/folders in gdrive."
     "\nCan't be undone, this method skipping file trash, so be caution..."
-    "\n\n.gdfset put"
+    "\n\n>`.gdfset put`"
     "\nUsage: Change upload directory in gdrive."
-    "\n\n.gdfset rm"
-    "\nUsage: remove set parentId from cmd\n.gdfset put "
+    "\n\n>`.gdfset rm`"
+    "\nUsage: remove set parentId from cmd\n>`.gdfset put` "
     "into **G_DRIVE_FOLDER_ID** and if empty upload will go to root."
     "\n\nNOTE:"
-    "\nfor .gdlist you can combine -l and -p flags with or without name "
+    "\nfor >`.gdlist` you can combine -l and -p flags with or without name "
     "at the same time, it must be `-l` flags first before use `-p` flags.\n"
     "And by default it lists from latest 'modifiedTime' and then folders."
 })
+
