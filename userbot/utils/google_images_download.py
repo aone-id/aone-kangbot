@@ -749,9 +749,8 @@ class googleimagesdownload:
         start_object = s.find('[', start_line + 1)
         end_object = s.find('</script>', start_object + 1) - 4
         object_raw = str(s[start_object:end_object])
-        object_decode = bytes(object_raw, "utf-8").decode("unicode_escape")
-        image_objects = json.loads(object_decode)[31][0][12][2]
-        return image_objects
+        object_decode = bytes(object_raw[:-1], "utf-8").decode("unicode_escape")
+        return json.loads(object_decode)[31][0][12][2]
 
     def _get_all_items(self,page,main_directory,dir_name,limit,arguments):
         items = []
