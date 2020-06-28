@@ -5,6 +5,7 @@ from userbot.events import register
 from datetime import date
 import time
 import os
+import shutil
 from userbot import TEMP_DOWNLOAD_DIRECTORY, ZIP_DOWNLOAD_DIRECTORY, bot, CMD_HELP
 from userbot.utils import progress, humanbytes, time_formatter, human_to_bytes
 
@@ -111,7 +112,7 @@ async def upload_zip(up):
         allow_cache=False,
         reply_to=up.message.id,
     )
-    os.rmdir(ZIP_DOWNLOAD_DIRECTORY)
+    shutil.rmtree(ZIP_DOWNLOAD_DIRECTORY)
     await up.delete()
 
 @register(outgoing=True, pattern=r"^\.rmzip(?: |$)(.*)")
@@ -119,7 +120,7 @@ async def remove_dir(rm):
     if not os.path.isdir(ZIP_DOWNLOAD_DIRECTORY):
         await rm.edit(f"`Directory not found`")
         return
-    os.rmdir(ZIP_DOWNLOAD_DIRECTORY)
+    shutil.rmtree(ZIP_DOWNLOAD_DIRECTORY)
     await rm.edit("`Zip list removed`")
 
 
