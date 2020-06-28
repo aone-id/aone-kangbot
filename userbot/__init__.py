@@ -54,7 +54,7 @@ if CONFIG_CHECK:
 # Version
 BOT_VERSION = "2.6"
 AONE_LOGO = os.environ.get(
-    "AONEE_LOGO",
+    "AONE_LOGO",
     "https://github.com/aone-id/aone-kangbot/raw/sql-extended/aoneid.png")
 
 # Telegram App KEY and HASH
