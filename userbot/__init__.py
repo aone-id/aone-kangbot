@@ -52,7 +52,7 @@ if CONFIG_CHECK:
     quit(1)
 
 # Version
-BOT_VERSION = "2.6"
+BOT_VERSION = "2.7"
 AONE_LOGO = os.environ.get(
     "AONE_LOGO",
     "https://github.com/aone-id/aone-kangbot/raw/sql-extended/aoneid.png")
