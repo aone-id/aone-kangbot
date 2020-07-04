@@ -106,7 +106,7 @@ def register(**args):
 
                     text = "**AONE-KANGBOT ERROR REPORT**\n"
                     text += "If you want to, you can report it"
-                    text += f"- just forward this message to @Aone_Helper_Bot .\n"
+                    text += f"- just forward this message to @aoneid_support .\n"
                     text += "Nothing is logged except the fact of error and date\n"
 
                     ftext = "========== DISCLAIMER =========="
