@@ -6,6 +6,10 @@ userbot.session-journal
 userbot/__pycache__/*
 userbot/modules/__pycache__/*
 userbot/modules/sql_helper/__pycache__/*
+userbot/utils/__pycache__/
+downloads
+zips
 .progress
 .vscode/*
 bin/*
+result.txt
