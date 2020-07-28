@@ -9,7 +9,7 @@
     "modular",
     "productivity"
   ],
-  "repository": "https://github.com/aone-id/aone-kangbot",
+  "repository": "https://github.com/Salmansha08/aone-kangbot",
   "website": "https://telegra.ph/How-to-host-a-Telegram-Userbot-11-02",
   "success_url": "https://t.me/PPE_Support",
   "stack": "container",
@@ -191,7 +191,7 @@
     },
     "DEFAULT_BIO": {
       "description": "Default profile bio.",
-      "value": "[PM = Report Spam] I ❤ ️@Aone-Kangbot",
+      "value": "[PM = Report Spam]",
       "required": false
     },
     "ALIVE_NAME": {
